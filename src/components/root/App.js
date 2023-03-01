@@ -10,9 +10,9 @@ return (
 <div>
 <Navi />
 <Routes>
-<Route exact path="posts/" element={<PostsList />} />
-<Route exact path="posts/:id" element={<SinglePost/>} />
-<Route exact path="posts/newpost" element={<AddPostForm/>} />
+<Route  path="posts/" element={<PostsList />} />
+<Route  path="posts/:id" element={<SinglePost/>} />
+<Route  path="posts/newpost" element={<AddPostForm/>} />
 </Routes>
 </div>
 );
