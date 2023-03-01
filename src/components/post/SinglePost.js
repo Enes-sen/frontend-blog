@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Navigate, } from "react-router-dom";
+import { useParams,} from "react-router-dom";
 import { fetchSinglePost, removePost } from "../../redux/actions/postActions";
 import EditPostForm from "../forms/EditPostForm";
 import moment from "moment";
@@ -19,7 +19,6 @@ const SinglePost = () => {
   const [openEdit, setOpenEdit] = useState(false);
   const dispatch = useDispatch();
   const currentPost = useSelector((state) => state.posts.currentPost);
-   const [redirectToHome, setRedirectToHome] = useState(false);
 
   useEffect(() => {
     dispatch(fetchSinglePost(id));
@@ -31,6 +30,7 @@ const SinglePost = () => {
     if (window.confirm("Bu gönderiyi silmek istediğinize emin misiniz?")) {
       dispatch(removePost(currentPost._id));
      setRedirectToHome(true);
+     window.location.replace(`/posts`);
     }
   };
 
@@ -40,16 +40,11 @@ const SinglePost = () => {
 
   const handleEditClose = () => {
     setOpenEdit(false);
+    window.location.replace(`/posts/${id}`);
   };
 
   if (!currentPost) {
     return <div>Loading...</div>;
-  }
-   if (openEdit===false) {
-    return <Navigate to={`/posts/${id}`} />;
-  }
-  if (redirectToHome) {
-    return <Navigate to="/posts" />;
   }
   return (
     <div className="Container-fluid mt-5" style={{ display: "flex", justifyContent: "center" }}>
