@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams,useHistory } from "react-router-dom";
 import { fetchSinglePost, removePost } from "../../redux/actions/postActions";
 import EditPostForm from "../forms/EditPostForm";
 import moment from "moment";
@@ -19,6 +19,7 @@ const SinglePost = () => {
   const [openEdit, setOpenEdit] = useState(false);
   const dispatch = useDispatch();
   const currentPost = useSelector((state) => state.posts.currentPost);
+   const history = useHistory();
 
   useEffect(() => {
     dispatch(fetchSinglePost(id));
@@ -29,7 +30,7 @@ const SinglePost = () => {
   const handleDelete = () => {
     if (window.confirm("Bu gönderiyi silmek istediğinize emin misiniz?")) {
       dispatch(removePost(currentPost._id));
-      window.location.href = "/posts";
+      history.push("/posts");
     }
   };
 
