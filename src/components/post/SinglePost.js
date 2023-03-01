@@ -29,7 +29,7 @@ const SinglePost = () => {
   const handleDelete = () => {
     if (window.confirm("Bu gönderiyi silmek istediğinize emin misiniz?")) {
       dispatch(removePost(currentPost._id));
-      window.location.replace(`/posts`);
+      window.location.replace("/");
     }
   };
 
@@ -39,7 +39,7 @@ const SinglePost = () => {
 
   const handleEditClose = () => {
     setOpenEdit(false);
-    window.location.replace(`/posts/${id}`);
+    window.location.replace("/");
   };
 
   if (!currentPost) {
