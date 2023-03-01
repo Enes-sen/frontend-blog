@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updatePost } from "../../redux/actions/postActions";
-import {useParams,Navigate} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import alertify from "alertifyjs";
 
@@ -11,7 +11,7 @@ const EditPostForm = ({ post: initialPost, close }) => {
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [content, setContent] = useState("");
-  const [redirectToHome, setRedirectToHome] = useState(false);
+  
 
   const dispatch = useDispatch();
 
@@ -42,7 +42,7 @@ const EditPostForm = ({ post: initialPost, close }) => {
         } else {
           dispatch(updatePost(id,updatedPost));
           alertify.success("Post güncellendi", 3);
-          setRedirectToHome(true);
+          window.location.replace(`/posts/${id}`);
           close();
         }
       }
@@ -55,12 +55,11 @@ const EditPostForm = ({ post: initialPost, close }) => {
     setTitle("");
     setSubtitle("");
     setContent("");
-    close(); // close the form
+    close();
+    window.location.replace(`/posts/${id}`);
     alertify.success("Girdi temizleme başarılı", 2);
   };
-   if (redirectToHome) {
-    return <Navigate to=`/posts/${id}` />;
-  }
+   
   return (
     <div className="container-fluid mt-3" style={{width:"80%",marginLeft:"10%"}}>
       <h2 className="text-center">Yazıyı Düzenle</h2>
