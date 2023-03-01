@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams,useHistory } from "react-router-dom";
+import { useParams,Redirect } from "react-router-dom";
 import { fetchSinglePost, removePost } from "../../redux/actions/postActions";
 import EditPostForm from "../forms/EditPostForm";
 import moment from "moment";
@@ -19,7 +19,7 @@ const SinglePost = () => {
   const [openEdit, setOpenEdit] = useState(false);
   const dispatch = useDispatch();
   const currentPost = useSelector((state) => state.posts.currentPost);
-   const history = useHistory();
+   const [redirectToHome, setRedirectToHome] = useState(false);
 
   useEffect(() => {
     dispatch(fetchSinglePost(id));
@@ -30,7 +30,7 @@ const SinglePost = () => {
   const handleDelete = () => {
     if (window.confirm("Bu gönderiyi silmek istediğinize emin misiniz?")) {
       dispatch(removePost(currentPost._id));
-      history.push("/posts");
+     setRedirectToHome(true);
     }
   };
 
@@ -46,7 +46,9 @@ const SinglePost = () => {
   if (!currentPost) {
     return <div>Loading...</div>;
   }
-
+  if (redirectToHome) {
+    return <Redirect to="/posts" />;
+  }
   return (
     <div className="Container-fluid mt-5" style={{ display: "flex", justifyContent: "center" }}>
       {openEdit ? (
