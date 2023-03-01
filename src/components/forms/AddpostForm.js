@@ -43,7 +43,7 @@ const AddPostForm = () => {
     alertify.success("Girdi temizleme başarılı", 2);
   };
     if (redirectToHome) {
-    return <Redirect to="/posts/:id" />;
+    return <Redirect to="/posts" />;
   }
   return (
     <div style={{ width: "80%", marginLeft: "10%", marginTop: "15%" }}>
