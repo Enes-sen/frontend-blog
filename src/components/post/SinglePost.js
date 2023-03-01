@@ -29,8 +29,7 @@ const SinglePost = () => {
   const handleDelete = () => {
     if (window.confirm("Bu gönderiyi silmek istediğinize emin misiniz?")) {
       dispatch(removePost(currentPost._id));
-     setRedirectToHome(true);
-     window.location.replace(`/posts`);
+      window.location.replace(`/posts`);
     }
   };
 
