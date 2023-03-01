@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updatePost } from "../../redux/actions/postActions";
-import {useParams,useHistory} from "react-router-dom";
+import {useParams,Redirect} from "react-router-dom";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import alertify from "alertifyjs";
 
 const EditPostForm = ({ post: initialPost, close }) => {
   const  {id}  = useParams();
-  const history = useHistory();
   const postId = id; // correct variable name
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [content, setContent] = useState("");
+  const [redirectToHome, setRedirectToHome] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -42,7 +42,7 @@ const EditPostForm = ({ post: initialPost, close }) => {
         } else {
           dispatch(updatePost(id,updatedPost));
           alertify.success("Post güncellendi", 3);
-           history.push(`/posts/${id}`);
+          setRedirectToHome(true);
           close();
         }
       }
@@ -58,7 +58,9 @@ const EditPostForm = ({ post: initialPost, close }) => {
     close(); // close the form
     alertify.success("Girdi temizleme başarılı", 2);
   };
-
+   if (redirectToHome) {
+    return <Redirect to=`/posts/${id}` />;
+  }
   return (
     <div className="container-fluid mt-3" style={{width:"80%",marginLeft:"10%"}}>
       <h2 className="text-center">Yazıyı Düzenle</h2>
