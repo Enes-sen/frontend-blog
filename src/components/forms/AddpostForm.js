@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import{Navigate} from "react-router-dom";
 import { addPost } from "../../redux/actions/postActions";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import alertify from "alertifyjs";
@@ -26,7 +27,7 @@ const AddPostForm = () => {
         setSubtitle("");
         setContent("");
         alertify.success("post kaydedildi",3);
-        window.location.href = "/posts";
+        <Navigate to="/"/>
       }
     } catch (error) {
       alertify.error(`kayıt Esnasında oluşan hata:${error}`,3);
