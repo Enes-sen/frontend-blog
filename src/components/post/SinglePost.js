@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams,Navigate } from "react-router-dom";
+import { useParams, Navigate, } from "react-router-dom";
 import { fetchSinglePost, removePost } from "../../redux/actions/postActions";
 import EditPostForm from "../forms/EditPostForm";
 import moment from "moment";
@@ -40,14 +40,16 @@ const SinglePost = () => {
 
   const handleEditClose = () => {
     setOpenEdit(false);
-    <Navigate to=`/posts/${id}`/>
   };
 
   if (!currentPost) {
     return <div>Loading...</div>;
   }
+   if (openEdit===false) {
+    return <Navigate to={`/posts/${id}`} />;
+  }
   if (redirectToHome) {
-    return <Redirect to="/posts" />;
+    return <Navigate to="/posts" />;
   }
   return (
     <div className="Container-fluid mt-5" style={{ display: "flex", justifyContent: "center" }}>
