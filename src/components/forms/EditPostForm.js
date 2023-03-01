@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updatePost } from "../../redux/actions/postActions";
-import {useParams,Redirect} from "react-router-dom";
+import {useParams,Navigate} from "react-router-dom";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import alertify from "alertifyjs";
 
@@ -59,7 +59,7 @@ const EditPostForm = ({ post: initialPost, close }) => {
     alertify.success("Girdi temizleme başarılı", 2);
   };
    if (redirectToHome) {
-    return <Redirect to=`/posts/${id}` />;
+    return <Navigate to=`/posts/${id}` />;
   }
   return (
     <div className="container-fluid mt-3" style={{width:"80%",marginLeft:"10%"}}>
