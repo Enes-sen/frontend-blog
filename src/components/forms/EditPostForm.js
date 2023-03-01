@@ -42,7 +42,7 @@ const EditPostForm = ({ post: initialPost, close }) => {
         } else {
           dispatch(updatePost(id,updatedPost));
           alertify.success("Post güncellendi", 3);
-          window.location.replace(`/posts/${id}`);
+          window.location.replace("/");
           close();
         }
       }
@@ -56,7 +56,7 @@ const EditPostForm = ({ post: initialPost, close }) => {
     setSubtitle("");
     setContent("");
     close();
-    window.location.replace(`/posts/${id}`);
+    window.location.replace("/");
     alertify.success("Girdi temizleme başarılı", 2);
   };
    
