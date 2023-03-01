@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { addPost } from "../../redux/actions/postActions";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import alertify from "alertifyjs";
@@ -43,7 +43,7 @@ const AddPostForm = () => {
     alertify.success("Girdi temizleme başarılı", 2);
   };
     if (redirectToHome) {
-    return <Redirect to="/posts" />;
+    return <Navigate to="/posts" />;
   }
   return (
     <div style={{ width: "80%", marginLeft: "10%", marginTop: "15%" }}>
