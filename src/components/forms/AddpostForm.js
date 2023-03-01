@@ -1,47 +1,51 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import{Navigate} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { addPost } from "../../redux/actions/postActions";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import alertify from "alertifyjs";
+
 const AddPostForm = () => {
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [content, setContent] = useState("");
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      if(title===""||subtitle===""||content===""){
-        alertify.error("post kaydetme eksik bilgi nedeni ile başarısız!",3);
-      }else{
+      if (title === "" || subtitle === "" || content === "") {
+        alertify.error("Post kaydetme eksik bilgi nedeni ile başarısız!", 3);
+      } else {
         const post = {
           title: title,
           subtitle: subtitle,
-          content: content
+          content: content,
         };
         dispatch(addPost(post));
         setTitle("");
         setSubtitle("");
         setContent("");
-        alertify.success("post kaydedildi",3);
-        <Navigate to="/"/>
+        alertify.success("Post kaydedildi", 3);
+        history.push("/");
       }
     } catch (error) {
-      alertify.error(`kayıt Esnasında oluşan hata:${error}`,3);
+      alertify.error(`Kayıt esnasında oluşan hata: ${error}`, 3);
     }
   };
-   const clearAll = ()=>{
+
+  const clearAll = () => {
     setTitle("");
     setSubtitle("");
     setContent("");
-    alertify.success("girdi temizleme başarılı",2);
-  }
+    alertify.success("Girdi temizleme başarılı", 2);
+  };
+
   return (
-    <div style={{width:"80%",marginLeft:"10%",marginTop:"15%"}}>
-      <h2 className="text-center" >Yeni Yazı Yayınla</h2>
+    <div style={{ width: "80%", marginLeft: "10%", marginTop: "15%" }}>
+      <h2 className="text-center">Yeni Yazı Yayınla</h2>
       <Form onSubmit={handleSubmit}>
         <FormGroup>
           <Label for="title">Başlık</Label>
@@ -73,9 +77,11 @@ const AddPostForm = () => {
             onChange={(e) => setContent(e.target.value)}
           />
         </FormGroup>
-        <Button color="danger" onClick={()=>clearAll()}>Vazgeç</Button>{"   "}
+        <Button color="danger" onClick={() => clearAll()}>
+          Vazgeç
+        </Button>{" "}
         <Button type="submit" color="primary" variant="outlined">
-          yayınla
+          Yayınla
         </Button>
       </Form>
     </div>
