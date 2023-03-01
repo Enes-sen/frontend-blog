@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { addPost } from "../../redux/actions/postActions";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import alertify from "alertifyjs";
@@ -9,9 +9,9 @@ const AddPostForm = () => {
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [content, setContent] = useState("");
+   const [redirectToHome, setRedirectToHome] = useState(false);
 
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,7 +29,7 @@ const AddPostForm = () => {
         setSubtitle("");
         setContent("");
         alertify.success("Post kaydedildi", 3);
-        history.push("/");
+        setRedirectToHome(true);
       }
     } catch (error) {
       alertify.error(`Kayıt esnasında oluşan hata: ${error}`, 3);
@@ -42,7 +42,9 @@ const AddPostForm = () => {
     setContent("");
     alertify.success("Girdi temizleme başarılı", 2);
   };
-
+    if (redirectToHome) {
+    return <Redirect to="/posts/:id" />;
+  }
   return (
     <div style={{ width: "80%", marginLeft: "10%", marginTop: "15%" }}>
       <h2 className="text-center">Yeni Yazı Yayınla</h2>
