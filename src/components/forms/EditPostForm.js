@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updatePost } from "../../redux/actions/postActions";
-import {useParams} from "react-router-dom";
+import {useParams,useHistory} from "react-router-dom";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import alertify from "alertifyjs";
 
 const EditPostForm = ({ post: initialPost, close }) => {
   const  {id}  = useParams();
+  const history = useHistory();
   const postId = id; // correct variable name
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
@@ -41,6 +42,7 @@ const EditPostForm = ({ post: initialPost, close }) => {
         } else {
           dispatch(updatePost(id,updatedPost));
           alertify.success("Post güncellendi", 3);
+           history.push(`/posts/${id}`);
           close();
         }
       }
