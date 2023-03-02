@@ -40,7 +40,7 @@ const SinglePost = () => {
 
   const handleEditClose = () => {
     setOpenEdit(false);
-    window.location.replace("/");
+    window.location.href="/";
   };
 
   if (!currentPost) {
