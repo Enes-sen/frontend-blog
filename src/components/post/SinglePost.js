@@ -14,7 +14,7 @@ import {
   CardImg,
   Badge,
 } from "reactstrap";
-import noImage from ="../../images/download.png";
+import noImage from "../../images/download.png";
 
 const SinglePost = () => {
   const { id } = useParams();
