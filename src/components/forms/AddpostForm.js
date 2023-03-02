@@ -38,7 +38,7 @@ alertify.success("Post kaydedildi", 3);
 setRedirectToHome(true);
 }
 } catch (error) {
-alertify.error(Kayıt esnasında oluşan hata: ${error}, 3);
+alertify.error(`Kayıt esnasında oluşan hata: ${error}`, 3);
 }
 };
 
