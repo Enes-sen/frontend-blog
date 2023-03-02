@@ -8,7 +8,6 @@ import alertify from "alertifyjs";
 
 const AddPostForm = () => {
 const [title, setTitle] = useState("");
-const [subtitle, setSubtitle] = useState("");
 const [content, setContent] = useState("");
 const [redirectToHome, setRedirectToHome] = useState(false);
 const [file, setFile] = useState(null);
@@ -18,7 +17,7 @@ const dispatch = useDispatch();
 const handleSubmit = (e) => {
 e.preventDefault();
 try {
-if (title === "" || subtitle === "" || content === "") {
+if (title === "" || content === "") {
 alertify.error(
 "Post kaydetme eksik bilgi nedeni ile başarısız!",
 3
@@ -26,7 +25,6 @@ alertify.error(
 } else {
 const post = {
 title: title,
-subtitle: subtitle,
 content: content,
 image: file,
 };
@@ -44,21 +42,18 @@ alertify.error(`Kayıt esnasında oluşan hata: ${error}`, 3);
 
 const clearAll = () => {
 setTitle("");
-setSubtitle("");
 setContent("");
 setFile(null);
 alertify.success("Girdi temizleme başarılı", 2);
 };
 
-if (redirectToHome) {
-return <Navigate to="/posts" />;
-}
+
 return (
 <div style={{ width: "80%", marginLeft: "10%", marginTop: "15%" }}>
 <h2 className="text-center">Yeni Yazı Yayınla</h2>
 <Form onSubmit={handleSubmit}>
 <FormGroup>
-<Label for="title">Başlık</Label>
+<Label for="title">İsim</Label>
 <Input
 type="text"
 name="title"
@@ -68,17 +63,7 @@ onChange={(e) => setTitle(e.target.value)}
 />
 </FormGroup>
 <FormGroup>
-<Label for="subtitle">Alt Başlık</Label>
-<Input
-type="text"
-name="subtitle"
-id="subtitle"
-value={subtitle}
-onChange={(e) => setSubtitle(e.target.value)}
-/>
-</FormGroup>
-<FormGroup>
-<Label for="content">İçerik</Label>
+<Label for="content">Yazı</Label>
 <Input
 type="textarea"
 name="content"
