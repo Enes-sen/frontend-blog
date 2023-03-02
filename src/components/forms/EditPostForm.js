@@ -22,7 +22,7 @@ const EditPostForm = ({ post: initialPost, close }) => {
     setContent(initialPost.content);
   }, [initialPost]);
   
-  const [file, setFile] = useState(currentPost?.image);
+  const [file, setFile] = useState(initialPost?.image);
 
   const handleSubmit = (e) => {
     e.preventDefault();
