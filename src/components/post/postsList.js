@@ -47,8 +47,8 @@ const PostsList = () => {
         justifyContent: "space-between",
         marginLeft: "5px",
         marginTop: "%10",
-        height: "fit-content",
-        width: "fit-content",
+        height: "100%",
+        width: "100%",
       }}
     >
       {posts
