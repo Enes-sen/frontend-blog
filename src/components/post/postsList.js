@@ -51,14 +51,13 @@ const PostsList = () => {
         .sort((a, b) => new Date(b.date) - new Date(a.date))
         .map((post) => (
           <Card className="my-2" style={{ width: "100%", margin: "10px", padding: "10px" }}>
-            <CardImg className="card-img-top"
+            <CardImg
               alt="Card image cap"
               src={post.image||noImage}
               style={{
-                height: 180,
+                height: "20%",
+                width="100%"
               }}
-              top
-              width="100%"
             />
             <CardBody>
               <CardTitle tag="h5">{post.title}</CardTitle>
