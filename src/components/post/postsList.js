@@ -50,7 +50,7 @@ const PostsList = () => {
       {posts
         .sort((a, b) => new Date(b.date) - new Date(a.date))
         .map((post) => (
-          <Card className="my-2 mt-2" style={{ width: "100%", margin: "10px", padding: "10px" }}>
+          <Card className="my-2 mt-4" style={{ width: "100%", margin: "10px", padding: "10px" }}>
             <CardImg
               alt="Card image cap"
               src={post.image||noImage}
@@ -62,11 +62,11 @@ const PostsList = () => {
             />
             <CardBody>
               <CardTitle tag="h5">{post.title}</CardTitle>
+                  <Badge color="primary">
+                   {convertRelativeTime(post.date)}
+                  </Badge>
               <CardText>
                 {post.content}
-              </CardText>
-              <CardText>
-                <Badge color="primmary">{convertRelativeTime(post.date)}</Badge>
               </CardText>
                <Link className="btn btn-primary"  to={`/posts/${post._id}`}>
                daha fazla
