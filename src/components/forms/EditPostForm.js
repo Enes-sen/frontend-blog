@@ -38,6 +38,7 @@ const EditPostForm = ({ post: initialPost, close }) => {
           title: title,
           subtitle:subtitle,
           content: content,
+          image: file,
         };
         if(JSON.stringify(updatedPost)===JSON.stringify({})){ // check if the object is empty correctly
           alertify.error("error occurred",2);
