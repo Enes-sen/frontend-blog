@@ -55,9 +55,10 @@ const PostsList = () => {
               alt="Card image cap"
               src={post.image||noImage}
               style={{
-                height: "20%",
-                width="100%"
+                height: "20%"
               }}
+              top
+              width="100%"
             />
             <CardBody>
               <CardTitle tag="h5">{post.title}</CardTitle>
