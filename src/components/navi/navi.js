@@ -23,7 +23,7 @@ export default class Navi extends Component {
         <NavbarBrand tag={Link} to="/posts">FistBlog</NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
-          <Nav style={{marginLeft:"83%"}} navbar>
+          <Nav style={{marginLeft:"78%"}} navbar>
             <NavItem>
               <NavLink tag={Link} to="/posts">Ana sayfa</NavLink>
             </NavItem>
