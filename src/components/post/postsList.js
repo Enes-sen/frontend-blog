@@ -50,7 +50,7 @@ const PostsList = () => {
       {posts
         .sort((a, b) => new Date(b.date) - new Date(a.date))
         .map((post) => (
-          <Card className="my-2" style={{ width: "100%", margin: "10px", marginTop:"2%", padding: "10px" }}>
+          <Card className="my-2" style={{ width: "100%", margin: "10px", marginTop:"5%", padding: "10px" }}>
             <CardImg
               alt="Card image cap"
               src={post.image||noImage}
