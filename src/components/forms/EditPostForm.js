@@ -10,7 +10,6 @@ const EditPostForm = ({ post: initialPost, close }) => {
   const  {id}  = useParams();
   const postId = id; // correct variable name
   const [title, setTitle] = useState("");
-  const [subtitle, setSubtitle] = useState("");
   const [content, setContent] = useState("");
   
 
@@ -18,7 +17,6 @@ const EditPostForm = ({ post: initialPost, close }) => {
 
   useEffect(() => {
     setTitle(initialPost.title);
-    setSubtitle(initialPost.subtitle);
     setContent(initialPost.content);
   }, [initialPost]);
   
@@ -36,7 +34,6 @@ const EditPostForm = ({ post: initialPost, close }) => {
         const updatedPost = {
           id: postId, // use the correct variable name
           title: title,
-          subtitle:subtitle,
           content: content,
           image: file,
         };
@@ -69,7 +66,7 @@ const EditPostForm = ({ post: initialPost, close }) => {
       <h2 className="text-center">Yazıyı Düzenle</h2>
       <Form onSubmit={handleSubmit} >
         <FormGroup>
-          <Label for="title">Başlık</Label>
+          <Label for="title">İsim</Label>
           <Input
             type="text"
             name="title"
@@ -79,17 +76,7 @@ const EditPostForm = ({ post: initialPost, close }) => {
           />
         </FormGroup>
         <FormGroup>
-          <Label for="subtitle">Alt Başlık</Label>
-          <Input
-            type="text"
-            name="subtitle"
-            id="subtitle"
-            value={subtitle}
-            onChange={(e) => setSubtitle(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="content">İçerik</Label>
+          <Label for="content">Yazı</Label>
           <Input
             type="textarea"
             name="content"
