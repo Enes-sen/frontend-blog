@@ -40,17 +40,6 @@ export const addPost = (post) => async (dispatch) => {
   }
 };
 
-// Update an existing post by id
-export const updatePost = (id, updatedPost) => async (dispatch) => {
-  try {
-    const { data } = await api.setPost(id, updatedPost);
-    dispatch({ type: types.UPDATE_POST_SUCCESS, payload: data });
-  } catch (error) {
-    console.error(error);
-    dispatch({ type: types.UPDATE_POST_FAILURE, payload: error.message });
-  }
-};
-
 // Delete a post by id
 export const removePost = (id) => async (dispatch) => {
   try {
