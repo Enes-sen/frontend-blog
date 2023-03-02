@@ -53,7 +53,7 @@ const PostsList = () => {
           <Card className="my-2" style={{ width: "100%", margin: "10px", padding: "10px" }}>
             <CardImg className="card-img-top"
               alt="Card image cap"
-              src={post.image}
+              src={post.image||noImage}
               style={{
                 height: 180,
               }}
