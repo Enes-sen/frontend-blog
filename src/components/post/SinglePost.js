@@ -9,7 +9,6 @@ import {
   CardBody,
   CardHeader,
   CardText,
-  CardTitle,
   Button,
   CardImg,
   Badge,
@@ -60,7 +59,6 @@ const SinglePost = () => {
             <Badge color="primary">
               {convertRelativeTime(currentPost.date)}
             </Badge>
-            <CardTitle tag="h6">{currentPost.subtitle}</CardTitle>
             <CardText>{currentPost.content}</CardText>
             <div
               style={{
