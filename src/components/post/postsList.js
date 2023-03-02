@@ -55,7 +55,7 @@ const PostsList = () => {
               alt="Card image cap"
               src={post.image||noImage}
               style={{
-                height: "fit-content"
+                height: "500px"
               }}
               top
               width="100%"
