@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchSinglePost, removePost } from "../../redux/actions/postActions";
-import EditPostForm from "../forms/EditPostForm";
 import moment from "moment";
 import {
   Card,
