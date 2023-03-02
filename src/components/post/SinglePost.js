@@ -55,13 +55,6 @@ const SinglePost = () => {
               marginTop: "20px",
             }}
           >
-            <Button
-              color="primary"
-              style={{ marginRight: "2%" }}
-              onClick={handleEditOpen}
-            >
-              düzenle
-            </Button>
             <Button color="danger" onClick={handleDelete}>
               Kaldır
             </Button>
