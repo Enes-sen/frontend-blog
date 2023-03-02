@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import FileBase64 from "react-file-base64";
 import { Navigate } from "react-router-dom";
 import { addPost } from "../../redux/actions/postActions";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
@@ -10,6 +11,7 @@ const AddPostForm = () => {
   const [subtitle, setSubtitle] = useState("");
   const [content, setContent] = useState("");
    const [redirectToHome, setRedirectToHome] = useState(false);
+    const [file, setFile] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -24,7 +26,7 @@ const AddPostForm = () => {
           subtitle: subtitle,
           content: content,
         };
-        dispatch(addPost(post));
+        dispatch(addPost(post, image: file));
         setTitle("");
         setSubtitle("");
         setContent("");
@@ -79,6 +81,7 @@ const AddPostForm = () => {
             onChange={(e) => setContent(e.target.value)}
           />
         </FormGroup>
+        <FileBase64 multiple={false} onDone={({ base64 }) => setFile(base64)}/>
         <Button color="danger" onClick={() => clearAll()}>
           Vazgeç
         </Button>{" "}
