@@ -30,7 +30,6 @@ image: file,
 };
 dispatch(addPost(post));
 setTitle("");
-setSubtitle("");
 setContent("");
 alertify.success("Post kaydedildi", 3);
 setRedirectToHome(true);
