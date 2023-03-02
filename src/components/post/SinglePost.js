@@ -55,7 +55,7 @@ const SinglePost = () => {
         <Card style={{ width: "90%", marginTop: "7%" }}>
         
           <CardHeader tag={"h1"}>{currentPost.title}</CardHeader>
-          <CardImg alt="Card image cap"src={currentPost.image || noImage}topwidth="60%" height="40½"/>
+          <CardImg alt="Card image cap"src={currentPost.image || noImage} style={{height:"60%",width:"70%" }}/>
           <CardBody style={{ display: openEdit ? "none" : "block" }}>
             <Badge color="primary">
               {convertRelativeTime(currentPost.date)}
