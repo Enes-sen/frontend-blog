@@ -45,6 +45,7 @@ const PostsList = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        marginTop:"50px"
       }}
     >
       {posts
