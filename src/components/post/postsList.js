@@ -12,7 +12,7 @@ import {
   CardImg,
   Badge,
 } from "reactstrap";
-import noImage from ="../../image/download.png";
+import noImage from ="../../images/download.png";
 
 const PostsList = () => {
   const [loading, setLoading] = useState(true);
