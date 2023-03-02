@@ -12,7 +12,7 @@ import {
   CardImg,
   Badge,
 } from "reactstrap";
-import noImage from ="../../images/download.png";
+import noImage from "../../images/download.png";
 
 const PostsList = () => {
   const [loading, setLoading] = useState(true);
@@ -64,7 +64,7 @@ const PostsList = () => {
               minHeight: "250px",
             }}
           >
-             <CardImg alt="Card image cap"src={post.image || noImage}topwidth="100%"/>
+            <CardImg alt="Card image cap" src={post.image || noImage} topWidth="100%" />
             <CardBody>
               <Badge color="primary">{convertRelativeTime(post.date)}</Badge>
               <CardTitle tag="h1">{post.title}</CardTitle>
