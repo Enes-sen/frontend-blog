@@ -9,8 +9,10 @@ import {
   CardSubtitle,
   CardTitle,
   CardText,
+  CardMedia,
   Badge,
 } from "reactstrap";
+import noImage from ="../../image/download.png";
 
 const PostsList = () => {
   const [loading, setLoading] = useState(true);
@@ -62,6 +64,7 @@ const PostsList = () => {
               minHeight: "250px",
             }}
           >
+             <CardMedia className="image-fluid" image={post.image || noImage}title="Paella dish"/>
             <CardBody>
               <Badge color="primary">{convertRelativeTime(post.date)}</Badge>
               <CardTitle tag="h1">{post.title}</CardTitle>
