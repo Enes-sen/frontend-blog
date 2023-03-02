@@ -64,7 +64,7 @@ const PostsList = () => {
               minHeight: "250px",
             }}
           >
-            <CardImg alt="Card image cap" src={post.image || noImage} topWidth="fit-content" width="fit-content" />
+            <CardImg alt="Card image cap" src={post.image || noImage} topWidth="30½" width="10%" />
             <CardBody>
               <Badge color="primary">{convertRelativeTime(post.date)}</Badge>
               <CardTitle tag="h1">{post.title}</CardTitle>
