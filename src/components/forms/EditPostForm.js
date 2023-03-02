@@ -11,21 +11,20 @@ const EditPostForm = ({ post: initialPost, close }) => {
   const postId = id; // correct variable name
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+   const [file, setFile] = useState(null);
   
 
   const dispatch = useDispatch();
-
   useEffect(() => {
     setTitle(initialPost.title);
     setContent(initialPost.content);
+    setFile(initialPost?.image);
   }, [initialPost]);
-  
-  const [file, setFile] = useState(initialPost?.image);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      if (title === "" || subtitle === "" || content === "") {
+      if (title === "" || content === "") {
         alertify.error(
           "Post kaydetme eksik bilgi nedeni ile başarısız!",
           3
@@ -54,7 +53,6 @@ const EditPostForm = ({ post: initialPost, close }) => {
 
   const clearAll = () => {
     setTitle("");
-    setSubtitle("");
     setContent("");
     close();
     window.location.href="/";
