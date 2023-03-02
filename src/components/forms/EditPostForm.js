@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import FileBase64 from "react-file-base64";
 import { updatePost } from "../../redux/actions/postActions";
 import {useParams} from "react-router-dom";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
@@ -20,6 +21,8 @@ const EditPostForm = ({ post: initialPost, close }) => {
     setSubtitle(initialPost.subtitle);
     setContent(initialPost.content);
   }, [initialPost]);
+  
+  const [file, setFile] = useState(currentPost?.image);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,7 +45,7 @@ const EditPostForm = ({ post: initialPost, close }) => {
         } else {
           dispatch(updatePost(id,updatedPost));
           alertify.success("Post güncellendi", 3);
-          window.location.replace("/");
+          window.location.href="/";
           close();
         }
       }
@@ -56,7 +59,7 @@ const EditPostForm = ({ post: initialPost, close }) => {
     setSubtitle("");
     setContent("");
     close();
-    window.location.replace("/");
+    window.location.href="/";
     alertify.success("Girdi temizleme başarılı", 2);
   };
    
@@ -94,6 +97,7 @@ const EditPostForm = ({ post: initialPost, close }) => {
             onChange={(e) => setContent(e.target.value)}
           />
         </FormGroup>
+        <FileBase64 multiple={false} onDone={({ base64 }) => setFile(base64)} />
         <Button color="danger" onClick={() => clearAll()}>
           Kapat
         </Button>{"   "}
