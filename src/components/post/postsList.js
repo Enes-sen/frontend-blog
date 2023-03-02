@@ -43,35 +43,34 @@ const PostsList = () => {
       className="Container"
       style={{
         display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "space-between",
-        marginLeft: "5px",
-        marginTop: "%10",
-        height: "100%",
-        width: "100%",
+        flexDirection: "column",
+        alignItems: "center",
       }}
     >
       {posts
         .sort((a, b) => new Date(b.date) - new Date(a.date))
         .map((post) => (
-          <Card
-            className="Container-fluid mt-5"
-            key={post._id}
-            style={{
-              margin: "5px",
-              padding: "10px",
-              minWidth: "250px",
-              minHeight: "250px",
-            }}
-          >
-            <CardImg alt="Card image cap" src={post.image || noImage} style={{height:"30%",width:"35%"}} />
+          <Card className="my-2" style={{ width: "100%", margin: "10px", padding: "10px" }}>
+            <CardImg
+              alt="Card image cap"
+              src={post.image}
+              style={{
+                height: 180,
+              }}
+              top
+              width="100%"
+            />
             <CardBody>
-              <Badge color="primary">{convertRelativeTime(post.date)}</Badge>
-              <CardTitle tag="h1">{post.title}</CardTitle>
-              <CardText>{post.content?.substring(0, 500) + "..."}</CardText>
-              <Link className="btn btn-primary" to={`/posts/${post._id}`}>
-                devamını oku...
-              </Link>
+              <CardTitle tag="h5">{post.title}</CardTitle>
+              <CardText>
+                {post.content}
+              </CardText>
+              <CardText>
+                <Badge color="primmary">{convertRelativeTime(post.date)}</Badge>
+              </CardText>
+               <Link className="btn btn-primary"  to={`/posts/${post._id}`}>
+               daha fazla
+               </Link>
             </CardBody>
           </Card>
         ))}
