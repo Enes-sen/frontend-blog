@@ -68,7 +68,6 @@ const PostsList = () => {
             <CardBody>
               <Badge color="primary">{convertRelativeTime(post.date)}</Badge>
               <CardTitle tag="h1">{post.title}</CardTitle>
-              <CardSubtitle tag="h6">{post.subtitle}</CardSubtitle>
               <CardText>{post.content?.substring(0, 500) + "..."}</CardText>
               <Link className="btn btn-primary" to={`/posts/${post._id}`}>
                 devamını oku...
