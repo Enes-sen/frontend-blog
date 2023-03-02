@@ -40,7 +40,7 @@ const PostsList = () => {
   }
   return (
     <div
-      className="Container"
+      className="Container-fluid"
       style={{
         display: "flex",
         flexDirection: "column",
@@ -51,7 +51,7 @@ const PostsList = () => {
         .sort((a, b) => new Date(b.date) - new Date(a.date))
         .map((post) => (
           <Card className="my-2" style={{ width: "100%", margin: "10px", padding: "10px" }}>
-            <CardImg
+            <CardImg className="card-img-top"
               alt="Card image cap"
               src={post.image}
               style={{
