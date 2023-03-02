@@ -8,6 +8,4 @@ export const getSinglePost = async (id) => await axios.get(`${apiRoute}${id}`);
 
 export const createPost = async (post) => await axios.post(apiRoute, post);
 
-export const setPost = async (id, updatedPost) => await axios.put(`${apiRoute}${id}`, updatedPost);
-
 export const deletePost = async (id) => await axios.delete(`${apiRoute}${id}`);
