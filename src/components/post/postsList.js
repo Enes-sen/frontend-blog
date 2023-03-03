@@ -39,47 +39,47 @@ const PostsList = () => {
     return <div>Gösterilecek gönderi yok</div>;
   }
   return (
-    <div
-      className="Container-fluid"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        marginTop:"9%",
-        marginLeft:"10%",
-        marginRight:"10%",
-        marginBottom:"%55"
-      }}
-    >
-      {posts
-        .sort((a, b) => new Date(b.date) - new Date(a.date))
-        .map((post) => (
-          <Card className="my-2" style={{ width: "100%", margin: "50px", marginTop:"25%", padding: "10px" }}>
-            <CardImg
-              alt="Card image cap"
-              src={post.image||noImage}
-              style={{
-                height: "600px"
-              }}
-              top
-              width="100%"
-            />
-            <CardBody>
-              <CardTitle tag="h5">{post.title}</CardTitle>
-                  <Badge color="primary">
-                   {convertRelativeTime(post.date)}
-                  </Badge>
-              <CardText>
-                {post.content}
-              </CardText>
-               <Link className="btn btn-primary"  to={`/posts/${post._id}`}>
-               daha fazla
-               </Link>
-            </CardBody>
-          </Card>
-        ))}
-    </div>
-  );
+  <div
+    className="Container-fluid"
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      marginTop:"9%",
+      marginBottom:"%55",
+      width: "80%", // genişlik ayarlayın
+      margin: "0 auto" // ortalamak için stil özelliği
+    }}
+  >
+    {posts
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .map((post) => (
+        <Card className="my-2" style={{ width: "100%", margin: "50px", marginTop:"25%", padding: "10px" }}>
+          <CardImg
+            alt="Card image cap"
+            src={post.image||noImage}
+            style={{
+              height: "600px"
+            }}
+            top
+            width="100%"
+          />
+          <CardBody>
+            <CardTitle tag="h5">{post.title}</CardTitle>
+                <Badge color="primary">
+                 {convertRelativeTime(post.date)}
+                </Badge>
+            <CardText>
+              {post.content}
+            </CardText>
+             <Link className="btn btn-primary"  to={`/posts/${post._id}`}>
+             daha fazla
+             </Link>
+          </CardBody>
+        </Card>
+      ))}
+  </div>
+ );
 };
 
 export default PostsList;
