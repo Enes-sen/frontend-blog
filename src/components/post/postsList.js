@@ -38,49 +38,53 @@ const PostsList = () => {
   if (!Array.isArray(posts)) {
     return <div>Gösterilecek gönderi yok</div>;
   }
+  
   return (
-  <div
-    className="Container-fluid"
-    style={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      marginTop:"6%",
-      marginBottom:"105px",
-      height:"fit-content",
-      width: "80%", // genişlik ayarlayın
-      margin: "0 auto", // ortalamak için stil özelliği
-    }}
-  >
-    {posts
-      .sort((a, b) => new Date(b.date) - new Date(a.date))
-      .map((post) => (
-        <Card className="my-2" style={{ width: "100%", margin: "50px", marginTop:"25%", padding: "10px" }}>
-          <CardImg
-            alt="Card image cap"
-            src={post.image||noImage}
-            style={{
-              height: "600px"
-            }}
-            top
-            width="100%"
-          />
-          <CardBody>
-            <CardTitle tag="h5">{post.title}</CardTitle>
+    <div
+      className="Container-fluid"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        marginTop:"6%",
+        marginBottom:"105px",
+        height:"fit-content",
+        width: "80%", // genişlik ayarlayın
+        margin: "0 auto", // ortalamak için stil özelliği
+      }}
+    >
+      {posts
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .map((post, index) => (
+          <React.Fragment key={index}>
+            <Card className="my-2" style={{ width: "100%", margin: "50px", marginTop:"25%", padding: "10px" }}>
+              <CardImg
+                alt="Card image cap"
+                src={post.image||noImage}
+                style={{
+                  height: "600px"
+                }}
+                top
+                width="100%"
+              />
+              <CardBody>
+                <CardTitle tag="h5">{post.title}</CardTitle>
                 <Badge color="primary">
-                 {convertRelativeTime(post.date)}
+                  {convertRelativeTime(post.date)}
                 </Badge>
-            <CardText>
-              {post.content}
-            </CardText>
-             <Link className="btn btn-primary"  to={`/posts/${post._id}`}>
-             daha fazla
-             </Link>
-          </CardBody>
-        </Card>
-      ))}
-  </div>
- );
+                <CardText>
+                  {post.content}
+                </CardText>
+                <Link className="btn btn-primary"  to={`/posts/${post._id}`}>
+                  daha fazla
+                </Link>
+              </CardBody>
+            </Card>
+            {index < posts.length - 1 && <div style={{ height: "50px" }}></div>} {/*Son posttan sonra boşluk ekleyin */}
+          </React.Fragment>
+        ))}
+    </div>
+  );
 };
 
 export default PostsList;
