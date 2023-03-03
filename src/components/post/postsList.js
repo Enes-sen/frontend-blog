@@ -46,7 +46,7 @@ const PostsList = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        marginTop:"9rem",
+        marginTop:"35%",
         marginBottom:"105px",
         height:"600px",
         width: "80%", // genişlik ayarlayın
