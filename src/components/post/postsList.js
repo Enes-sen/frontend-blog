@@ -48,7 +48,7 @@ const PostsList = () => {
         marginTop:"9%",
         marginLeft:"10%",
         marginRight:"10%",
-        marginBottom:"%15"
+        marginBottom:"%55"
       }}
     >
       {posts
