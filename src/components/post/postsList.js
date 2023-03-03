@@ -48,7 +48,7 @@ const PostsList = () => {
         alignItems: "center",
         marginTop:"9rem",
         marginBottom:"105px",
-        height:"fit-content",
+        height:"600px",
         width: "80%", // genişlik ayarlayın
         margin: "0 auto", // ortalamak için stil özelliği
       }}
