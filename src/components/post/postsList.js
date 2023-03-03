@@ -48,7 +48,7 @@ const PostsList = () => {
       marginTop:"9%",
       marginBottom:"%55",
       width: "80%", // genişlik ayarlayın
-      margin: "0 auto" // ortalamak için stil özelliği
+      margin: "0 auto", // ortalamak için stil özelliği
       paddingBottom:"50px",
     }}
   >
