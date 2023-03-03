@@ -46,10 +46,9 @@ const PostsList = () => {
       flexDirection: "column",
       alignItems: "center",
       marginTop:"9%",
-      marginBottom:"%55",
+      marginBottom:"45px",
       width: "80%", // genişlik ayarlayın
       margin: "0 auto", // ortalamak için stil özelliği
-      paddingBottom:"50px",
     }}
   >
     {posts
