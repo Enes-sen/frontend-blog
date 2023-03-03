@@ -45,16 +45,16 @@ const PostsList = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        marginTop:"7%",
-        marginLeft:"8%",
-        marginRight:"8%",
-        marginBottom:"%10"
+        marginTop:"9%",
+        marginLeft:"10%",
+        marginRight:"10%",
+        marginBottom:"%15"
       }}
     >
       {posts
         .sort((a, b) => new Date(b.date) - new Date(a.date))
         .map((post) => (
-          <Card className="my-2" style={{ width: "100%", margin: "10px", marginTop:"25%", padding: "10px" }}>
+          <Card className="my-2" style={{ width: "100%", margin: "50px", marginTop:"25%", padding: "10px" }}>
             <CardImg
               alt="Card image cap"
               src={post.image||noImage}
