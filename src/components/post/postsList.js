@@ -45,9 +45,10 @@ const PostsList = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        marginTop:"150px",
-        marginLeft:"2%",
-        marginRight:"2%"
+        marginTop:"5%",
+        marginLeft:"4%",
+        marginRight:"4%",
+        marginBottom:"%4"
       }}
     >
       {posts
