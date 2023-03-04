@@ -48,7 +48,7 @@ const PostsList = () => {
       alignItems: "center",
       position: "relative", // set position to relative
       marginTop: "45%",
-      marginBottom: "60px",
+      marginBottom: "160px",
       height: "600px",
       width: "80%", // set width
       margin: "0 auto",
@@ -59,7 +59,7 @@ const PostsList = () => {
       .sort((a, b) => new Date(b.date) - new Date(a.date))
       .map((post, index) => (
         <React.Fragment key={index}>
-          <Card className="mt-5" style={{ width: "100%",  margin: "0 auto", marginTop:"200px",marginBottom:"100px", padding: "10px" }}>
+          <Card className="mt-5" style={{ width: "100%",  margin: "0 auto", marginTop:"200px",marginBottom:"200px", padding: "10px" }}>
             <CardImg
               alt="Card image cap"
               src={post.image || noImage}
