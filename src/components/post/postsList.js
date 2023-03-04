@@ -41,12 +41,12 @@ const PostsList = () => {
   
  return (
   <div
-    className="Container-fluid mt-3"
+    className="Container-fluid mt-5"
     style={{
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      position: "absolute", // set position to relative
+      position: "relative", // set position to relative
       marginTop: "25%",
       marginBottom: "60px",
       height: "600px",
