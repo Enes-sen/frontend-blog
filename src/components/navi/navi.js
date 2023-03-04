@@ -19,7 +19,7 @@ export default class Navi extends Component {
 
   render() {
     return (
-      <Navbar color="dark" dark expand="md" fixed="top" className="mb-5">
+      <Navbar color="dark" dark expand="md" fixed="top" style={{marginBottom:"40px"}}>
         <NavbarBrand tag={Link} to="/posts">FistBlog</NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
