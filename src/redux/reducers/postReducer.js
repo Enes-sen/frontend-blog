@@ -32,7 +32,7 @@ const postReducer = (state = initialState, action) => {
         posts: filteredPosts,
         currentPost: {},
       };
-    case types.ADD_COMMENT_SUCCESS:
+    case types.CREATE_COMMENT_SUCCESS:
       const updatedPosts = state.posts.map((post) => {
         if (post._id === action.payload.postId) {
           return {
