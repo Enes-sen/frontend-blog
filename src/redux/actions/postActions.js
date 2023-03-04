@@ -49,4 +49,53 @@ export const removePost = (id) => async (dispatch) => {
     console.error(error);
     dispatch({ type: types.DELETE_POST_FAILURE, payload: error.message });
   }
+}; // Fetch all comments for a post
+export const fetchComments = (postId) => async (dispatch) => {
+try {
+const { data } = await api.getComments(postId);
+dispatch({
+type: types.GET_COMMENTS_SUCCESS,
+payload: { postId, comments: data },
+});
+} catch (error) {
+console.error(error);
+dispatch({
+type: types.GET_COMMENTS_FAILURE,
+payload: error.message,
+});
+}
 };
+
+// Add a comment to a post
+export const addComment = (postId, comment) => async (dispatch) => {
+try {
+const { data } = await api.createComment(postId, comment);
+dispatch({
+type: types.ADD_COMMENT_SUCCESS,
+payload: { postId, comment: data },
+});
+} catch (error) {
+console.error(error);
+dispatch({
+type: types.ADD_COMMENT_FAILURE,
+payload: error.message,
+});
+}
+};
+
+// Delete a comment from a post
+export const deleteComment = (postId, commentId) => async (dispatch) => {
+try {
+await api.deleteComment(postId, commentId);
+dispatch({
+type: types.DELETE_COMMENT_SUCCESS,
+payload: { postId, commentId },
+});
+} catch (error) {
+console.error(error);
+dispatch({
+type: types.DELETE_COMMENT_FAILURE,
+payload: error.message,
+});
+}
+}; 
