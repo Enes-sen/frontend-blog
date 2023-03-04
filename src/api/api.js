@@ -9,10 +9,10 @@ export const getSinglePost = async (id) => await axios.get(`${apiRoute}${id}`);
 
 export const createPost = async (post) => await axios.post(apiRoute, post);
 
-export const deletePost = async (id) => await axios.delete(${apiRoute}${id});
+export const deletePost = async (id) => await axios.delete(`${apiRoute}${id}`);
 
-export const getPostComments = async (postId) => await axios.get(${commentRoute}${postId});
+export const getPostComments = async (postId) => await axios.get(`${commentRoute}${postId}`);
 
-export const createComment = async (comment, postId) => await axios.post(${commentRoute}${postId}, comment);
+export const createComment = async (comment, postId) => await axios.post(`${commentRoute}${postId}`, comment);
 
-export const deleteComment = async (commentId, postId) => await axios.delete(${commentRoute}${postId}/${commentId});
+export const deleteComment = async (commentId, postId) => await axios.delete(`${commentRoute}${postId}/${commentId}`);
