@@ -54,13 +54,13 @@ export const fetchComments = (postId) => async (dispatch) => {
 try {
 const { data } = await api.getPostComments(postId);
 dispatch({
-type: types.GET_COMMENTS_SUCCESS,
+type: types.GET_POST_COMMENTS_SUCCESS,
 payload: { postId, comments: data },
 });
 } catch (error) {
 console.error(error);
 dispatch({
-type: types.GET_COMMENTS_FAILURE,
+type: types.GET_POST_COMMENTS_FAILURE,
 payload: error.message,
 });
 }
