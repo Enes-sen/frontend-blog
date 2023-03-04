@@ -47,8 +47,8 @@ const PostsList = () => {
       flexDirection: "column",
       alignItems: "center",
       position: "relative", // set position to relative
-      marginTop: "35%",
-      marginBottom: "105px",
+      marginTop: "75%",
+      marginBottom: "305px",
       height: "600px",
       width: "80%", // set width
       margin: "0 auto",
