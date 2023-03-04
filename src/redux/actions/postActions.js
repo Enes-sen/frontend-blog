@@ -64,12 +64,12 @@ export const addComment = (postId, comment) => async (dispatch) => {
   try {
     const { data } = await api.createComment(postId, comment);
     dispatch({
-      type: types.ADD_COMMENT_SUCCESS,
+      type: types.CREATE_COMMENT_SUCCESS,
       payload: { postId, comment: data },
     });
   } catch (error) {
     console.error(error);
-    dispatch({ type: types.ADD_COMMENT_FAILURE, payload: error.message });
+    dispatch({ type: types.CREATE_COMMENT_FAILURE, payload: error.message });
   }
 };
 
