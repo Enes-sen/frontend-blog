@@ -41,7 +41,7 @@ const PostsList = () => {
   
  return (
   <div
-    className="Container-fluid"
+    className="Container-fluid mt-3"
     style={{
       display: "flex",
       flexDirection: "column",
