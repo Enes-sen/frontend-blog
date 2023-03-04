@@ -31,6 +31,46 @@ const postReducer = (state = initialState, action) => {
         posts: filteredPosts,
         currentPost: {},
       };
+    case types.ADD_COMMENT_SUCCESS:
+      const updatedPosts = state.posts.map((post) => {
+        if (post._id === action.payload.postId) {
+          return {
+            ...post,
+            comments: [...post.comments, action.payload.comment],
+          };
+        }
+        return post;
+      });
+      return {
+        ...state,
+        posts: updatedPosts,
+        currentPost: {
+          ...state.currentPost,
+          comments: [...state.currentPost.comments, action.payload.comment],
+        },
+      };
+    case types.DELETE_COMMENT_SUCCESS:
+      const updatedPosts2 = state.posts.map((post) => {
+        if (post._id === action.payload.postId) {
+          return {
+            ...post,
+            comments: post.comments.filter(
+              (comment) => comment._id !== action.payload.commentId
+            ),
+          };
+        }
+        return post;
+      });
+      return {
+        ...state,
+        posts: updatedPosts2,
+        currentPost: {
+          ...state.currentPost,
+          comments: state.currentPost.comments.filter(
+            (comment) => comment._id !== action.payload.commentId
+          ),
+        },
+      };
     default:
       return state;
   }
