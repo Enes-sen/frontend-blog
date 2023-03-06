@@ -5,7 +5,7 @@ import moment from "moment";
 
 const CommentList = ({ postId }) => {
 const comments = useSelector((state) =>
-state.comment.comments.filter((comment) => comment.post === postId)
+state.posts.comments.filter((comment) => comment.post === postId)
 );
 
 const convertRelativeTime = (date) => {
