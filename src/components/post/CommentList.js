@@ -3,11 +3,11 @@ import { useSelector } from "react-redux";
 import { Card, CardBody, CardSubtitle, CardTitle } from "reactstrap";
 import moment from "moment";
 
-const CommentList = ({ currentPost }) => {
-  const comments = currentPost ? currentPost.comments : [];
+const CommentList = ({ postId }) => {
 
-  // check if comments is defined before filtering
-  const filteredComments = comments.filter(comment => comment.postId === currentPost._id);
+ useEffect(() => {
+    dispatch(fetchComments(postId));
+  }, [dispatch, postId ]);
 
   const convertRelativeTime = (date) => {
     return moment(date).fromNow();
