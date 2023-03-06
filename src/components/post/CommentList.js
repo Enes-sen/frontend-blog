@@ -4,11 +4,8 @@ import { Card, CardBody, CardSubtitle, CardTitle } from "reactstrap";
 import moment from "moment";
 
 const CommentList = ({ postId }) => {
-const comments = useSelector((state) =>
- console.log(state);
-state.posts.comments.filter((comment) => comment.post === postId)
-);
-
+const comments = useSelector(state);
+console.log(state);
 const convertRelativeTime = (date) => {
 return moment(date).fromNow(); // tarihi "x zaman önce" formatında döndürür
 };
