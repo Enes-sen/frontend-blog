@@ -13,7 +13,7 @@ import {
   Badge,
 } from "reactstrap";
 import noImage from "../../images/download.png";
-import CommentList from "./CommentList"; // import the CommentList component
+import CommentList from "./CommentList";
 
 const SinglePost = () => {
   const { id } = useParams();
@@ -26,7 +26,7 @@ const SinglePost = () => {
   }, [dispatch, id]);
 
   const convertRelativeTime = (date) => {
-    return moment(date).fromNow(); // tarihi "x zaman önce" formatında döndürür
+    return moment(date).fromNow();
   };
 
   const handleDelete = () => {
@@ -63,7 +63,7 @@ const SinglePost = () => {
           </div>
         </CardBody>
       </Card>
-      <CommentList postId={postId} currentPost={currentPost} /> {/* render the CommentList component */}
+      <CommentList currentPost={currentPost} />
     </div>
   );
 };
