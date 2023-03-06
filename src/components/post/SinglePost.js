@@ -44,7 +44,7 @@ const SinglePost = () => {
     <div className="Container-fluid mt-5" style={{ display: "flex", justifyContent: "center" }}>
       <Card style={{ width: "90%", marginTop: "7%" }}>
         <CardHeader tag={"h1"}>{currentPost.title}</CardHeader>
-        <CardImg alt="Card image cap"src={currentPost.image || noImage} style={{height:"60%",width:"70%" }}/>
+        <CardImg alt="Card image cap" src={currentPost.image || noImage} style={{height:"60%",width:"70%" }}/>
         <CardBody>
           <Badge color="primary">
             {convertRelativeTime(currentPost.date)}
