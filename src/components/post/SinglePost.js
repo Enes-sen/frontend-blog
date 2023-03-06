@@ -63,7 +63,7 @@ const SinglePost = () => {
           </div>
         </CardBody>
       </Card>
-      <CommentList currentPost={currentPost} />
+      <CommentList postId={postId} />
     </div>
   );
 };
