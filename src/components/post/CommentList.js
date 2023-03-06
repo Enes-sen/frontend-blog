@@ -21,7 +21,7 @@ const CommentList = ({ currentPost }) => {
             <CardSubtitle tag="h6" className="mb-2 text-muted">
               {convertRelativeTime(comment.date)}
             </CardSubtitle>
-            <p>{comment.content}</p>
+            <p>{comment.comment}</p>
           </CardBody>
         </Card>
       ))}
