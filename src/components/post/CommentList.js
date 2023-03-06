@@ -1,17 +1,22 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchComments } from "../actions/postActions";
 import { Card, CardBody, CardSubtitle, CardTitle } from "reactstrap";
 import moment from "moment";
 
 const CommentList = ({ postId }) => {
+  const dispatch = useDispatch();
+  const comments = useSelector((state) => state.postReducer.currentPost.comments);
 
- useEffect(() => {
+  useEffect(() => {
     dispatch(fetchComments(postId));
-  }, [dispatch, postId ]);
+  }, [dispatch, postId]);
 
   const convertRelativeTime = (date) => {
     return moment(date).fromNow();
   };
+
+  const filteredComments = comments.filter((comment) => comment.postId === postId);
 
   return (
     <div className="comments">
