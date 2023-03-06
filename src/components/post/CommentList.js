@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 import { Card, CardBody, CardSubtitle, CardTitle } from "reactstrap";
 import moment from "moment";
 
-const CommentList = ({postId }) => {
-    const comments = useSelector(state => state.posts.currentPost.comments);
-  const filteredComments = comments.filter(comment => comment.postId === postId);
+const CommentList = ({ postId }) => {
+  const comments = useSelector((state) => state.posts.currentPost.comments);
+  const filteredComments = comments.filter((comment) => comment.postId === postId);
 
   const convertRelativeTime = (date) => {
     return moment(date).fromNow();
@@ -13,7 +13,7 @@ const CommentList = ({postId }) => {
 
   return (
     <div className="comments">
-      {comments.map((comment) => (
+      {filteredComments.map((comment) => (
         <Card key={comment._id} className="mt-3">
           <CardBody>
             <CardTitle tag="h6">{comment.name}</CardTitle>
