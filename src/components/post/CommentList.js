@@ -3,10 +3,9 @@ import { useSelector } from "react-redux";
 import { Card, CardBody, CardSubtitle, CardTitle } from "reactstrap";
 import moment from "moment";
 
-const CommentList = ({postId }) => {
-  const comments = useSelector(state => state.posts.comments.filter(comment => comment.postId === postId));
+const CommentList = ({ currentPost }) => {
+  const comments = useSelector(state => state.posts.comments.filter(comment => comment.postId === currentPost._id));
 
-  console.log(comments); 
   const convertRelativeTime = (date) => {
     return moment(date).fromNow();
   };
