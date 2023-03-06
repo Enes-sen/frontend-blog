@@ -19,6 +19,7 @@ const SinglePost = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const currentPost = useSelector((state) => state.posts.currentPost);
+  const postId = id;
 
   useEffect(() => {
     dispatch(fetchSinglePost(id));
@@ -62,7 +63,7 @@ const SinglePost = () => {
           </div>
         </CardBody>
       </Card>
-      <CommentList postId={currentPost._id} /> {/* render the CommentList component */}
+      <CommentList postId={postId} ,currentpost={currentPost] /> {/* render the CommentList component */}
     </div>
   );
 };
