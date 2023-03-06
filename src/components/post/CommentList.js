@@ -5,7 +5,9 @@ import moment from "moment";
 
 const CommentList = ({ postId }) => {
   const comments = useSelector((state) => state.posts.currentPost.comments);
-  const filteredComments = comments.filter((comment) => comment.postId === postId);
+
+  // check if comments is defined before filtering
+  const filteredComments = comments ? comments.filter(comment => comment.postId === postId) : [];
 
   const convertRelativeTime = (date) => {
     return moment(date).fromNow();
