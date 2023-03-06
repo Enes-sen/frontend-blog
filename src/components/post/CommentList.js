@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Card, CardBody, CardSubtitle, CardTitle } from "reactstrap";
 import moment from "moment";
 
-const CommentList = ({ currentPost }) => {
+const CommentList = ({ currentPost,postId }) => {
   const comments = useSelector(state => state.posts.comments.filter(comment => comment.postId === postId));
 
   console.log(comments); 
