@@ -4,9 +4,8 @@ import { Card, CardBody, CardSubtitle, CardTitle } from "reactstrap";
 import moment from "moment";
 
 const CommentList = ({ currentPost }) => {
-  const comments = useSelector((state) =>
-    state.posts.find((post) => post._id === currentPost._id).comments
-  );
+  const comments = useSelector(state => state.posts.comments.filter(comment => comment.postId === postId));
+
   console.log(comments); 
   const convertRelativeTime = (date) => {
     return moment(date).fromNow();
