@@ -5,6 +5,7 @@ import moment from "moment";
 
 const CommentList = ({ postId }) => {
 const comments = useSelector((state) =>
+ console.log(state);
 state.posts.comments.filter((comment) => comment.post === postId)
 );
 
