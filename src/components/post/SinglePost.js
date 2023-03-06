@@ -13,6 +13,7 @@ import {
   Badge,
 } from "reactstrap";
 import noImage from "../../images/download.png";
+import CommentList from "./CommentList"; // import the CommentList component
 
 const SinglePost = () => {
   const { id } = useParams();
@@ -61,6 +62,7 @@ const SinglePost = () => {
           </div>
         </CardBody>
       </Card>
+      <CommentList postId={currentPost._id} /> {/* render the CommentList component */}
     </div>
   );
 };
