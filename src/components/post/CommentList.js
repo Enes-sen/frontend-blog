@@ -17,9 +17,14 @@ const CommentList = ({ postId }) => {
   };
 
   const filteredComments = comments && comments.filter((comment) => comment.postId === postId);
+
+  if (!filteredComments || filteredComments.length === 0) {
+    return <div>Bu yazıya henüz yorum yapılmamış.</div>;
+  }
+
   return (
     <div className="comments">
-      {filteredComments?.map((comment) => (
+      {filteredComments.map((comment) => (
         <Card key={comment._id} className="mt-3">
           <CardBody>
             <CardTitle tag="h6">{comment.name}</CardTitle>
