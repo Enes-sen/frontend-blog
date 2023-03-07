@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPostComments  } from "../../redux/actions/postActions";
+import { fetchPostComments } from "../../redux/actions/postActions";
 import { Card, CardBody, CardSubtitle, CardTitle } from "reactstrap";
 import moment from "moment";
 
@@ -8,6 +8,7 @@ const CommentList = ({ postId }) => {
   const dispatch = useDispatch();
   const comments = useSelector((state) => state.posts.currentPost?.comments);
   console.log("comments-array:", comments);
+
   useEffect(() => {
     dispatch(fetchPostComments(postId));
   }, [dispatch, postId]);
@@ -16,10 +17,14 @@ const CommentList = ({ postId }) => {
     return moment(date).fromNow();
   };
 
-  const filteredComments = Array.isArray(comments) && comments.filter((comment) => comment.postId === postId);
-   console.log("filteredcomments-array:", filteredComments);
+  const filteredComments = Array.isArray(comments) && comments.filter((comment) => comment.postId == postId);
+  console.log("filteredcomments-array:", filteredComments);
 
-  if (!filteredComments || filteredComments.length === 0) {
+  if (!comments) {
+    return <div>Loading comments...</div>;
+  }
+
+  if (filteredComments.length === 0) {
     return <div>Bu yazıya henüz yorum yapılmamış.</div>;
   }
 
@@ -39,4 +44,5 @@ const CommentList = ({ postId }) => {
     </div>
   );
 };
+
 export default CommentList;
