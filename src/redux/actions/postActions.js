@@ -62,7 +62,7 @@ export const fetchPostComments = (postId) => async (dispatch) => {
   }
 };
 
-// Add a comment to a post by post id
+// Bir posta yorum ekle
 export const addComment = (comment, postId) => async (dispatch) => {
   try {
     const { data } = await api.createComment(comment, postId);
