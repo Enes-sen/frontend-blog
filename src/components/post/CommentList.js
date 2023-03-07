@@ -30,8 +30,7 @@ const CommentList = ({ postId }) => {
 
  return (
   <div className="comments">
-    {Array.isArray(filteredComments) &&
-      filteredComments.map((comment) => (
+    {filteredComments.map((comment) => (
         <Card key={comment._id} className="mt-3">
           <CardBody>
             <CardTitle tag="h6">{comment.name}</CardTitle>
