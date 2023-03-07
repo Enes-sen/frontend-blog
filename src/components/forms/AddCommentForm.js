@@ -18,8 +18,7 @@ const AddCommentForm = ({ postId }) => {
       } else {
         const newComment = {
           name: name,
-          comment: comment,
-          postId: postId
+          comment: comment
         };
         dispatch(addComment(postId,newComment));
         setName("");
