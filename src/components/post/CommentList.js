@@ -17,6 +17,7 @@ const CommentList = ({ postId }) => {
   };
 
   const filteredComments = comments && comments.filter((comment) => comment.postId === postId);
+   console.log("filteredcomments-array:", filteredComments);
 
   if (!filteredComments || filteredComments.length === 0) {
     return <div>Bu yazıya henüz yorum yapılmamış.</div>;
