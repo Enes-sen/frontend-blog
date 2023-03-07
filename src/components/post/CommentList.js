@@ -6,8 +6,8 @@ import moment from "moment";
 
 const CommentList = ({ postId }) => {
   const dispatch = useDispatch();
-  const comments = useSelector((state) => state.posts.currentPost.comments);
-  console.log("comments-array:"+commments);
+  const comments = useSelector((state) => state.posts.currentPost?.comments);
+  console.log("comments-array:", comments);
   useEffect(() => {
     dispatch(fetchComments(postId));
   }, [dispatch, postId]);
@@ -16,11 +16,11 @@ const CommentList = ({ postId }) => {
     return moment(date).fromNow();
   };
 
-  const filteredComments = comments.filter((comment) => comment.postId === postId);
+  const filteredComments = comments?.filter((comment) => comment.postId === postId);
 
   return (
     <div className="comments">
-      {filteredComments.map((comment) => (
+      {filteredComments?.map((comment) => (
         <Card key={comment._id} className="mt-3">
           <CardBody>
             <CardTitle tag="h6">{comment.name}</CardTitle>
