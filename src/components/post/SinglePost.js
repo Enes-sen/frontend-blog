@@ -14,6 +14,7 @@ Badge,
 } from "reactstrap";
 import noImage from "../../images/download.png";
 import CommentList from "./CommentList";
+import AddCommentForm from "../forms/AddCommentForm";
 
 const SinglePost = () => {
 const { id } = useParams();
@@ -71,6 +72,7 @@ Kaldır
 </div>
 </CardBody>
 </Card>
+<AddCommentForm postId={postId}/>
 <CommentList postId={postId} />
 </div>
 );
