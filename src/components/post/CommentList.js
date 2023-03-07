@@ -39,5 +39,4 @@ const CommentList = ({ postId }) => {
     </div>
   );
 };
-
 export default CommentList;
