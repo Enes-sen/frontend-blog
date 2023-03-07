@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchComments } from "../../redux/actions/postActions";
+import { fetchPostComments  } from "../../redux/actions/postActions";
 import { Card, CardBody, CardSubtitle, CardTitle } from "reactstrap";
 import moment from "moment";
 
@@ -9,7 +9,7 @@ const CommentList = ({ postId }) => {
   const comments = useSelector((state) => state.posts.currentPost?.comments);
   console.log("comments-array:", comments);
   useEffect(() => {
-    dispatch(fetchComments(postId));
+    dispatch(fetchPostComments(postId));
   }, [dispatch, postId]);
 
   const convertRelativeTime = (date) => {
