@@ -5,38 +5,41 @@ import { Card, CardBody, CardSubtitle, CardTitle } from "reactstrap";
 import moment from "moment";
 
 const CommentList = ({ postId }) => {
-  const dispatch = useDispatch();
-  const currentPost = useSelector((state) => state.posts.currentPost);
-  const comments = currentPost?.comments || [];
+const dispatch = useDispatch();
+const comments = useSelector((state) => state.posts.currentPost?.comments);
 
-  useEffect(() => {
-    dispatch(fetchPostComments(postId));
-  }, [dispatch, postId]);
+console.log(comments);
 
-  const convertRelativeTime = (date) => {
-    return moment(date).fromNow();
-  };
+useEffect(() => {
+dispatch(fetchPostComments(postId));
+}, [dispatch, postId]);
 
-  if (!currentPost) {
-    return <div>Loading post...</div>;
-  }
+const convertRelativeTime = (date) => {
+return moment(date).fromNow();
+};
 
-  return (
-    <div className="comments">
-      {comments.length === 0 && <div>No comments yet.</div>}
-      {comments.map((comment) => (
-        <Card key={comment._id} className="mt-3">
-          <CardBody>
-            <CardTitle tag="h6">{comment.name}</CardTitle>
-            <CardSubtitle tag="h6" className="mb-2 text-muted">
-              {convertRelativeTime(comment.date)}
-            </CardSubtitle>
-            <p>{comment.comment}</p>
-          </CardBody>
-        </Card>
-      ))}
-    </div>
-  );
+if (!Array.isArray(comments)) {
+return <div>Loading comments...</div>;
+}
+
+return (
+<div className="comments">
+{comments
+.filter((comment) => comment.postId === postId)
+.map((comment) => (
+<Card key={comment._id} className="mt-3">
+<CardBody>
+<CardTitle tag="h6">{comment.name}</CardTitle>
+<CardSubtitle tag="h6" className="mb-2 text-muted">
+{convertRelativeTime(comment.date)}
+</CardSubtitle>
+<p>{comment.comment}</p>
+</CardBody>
+</Card>
+))}
+{comments.length === 0 && <div>No comments yet.</div>}
+</div>
+);
 };
 
 export default CommentList;
