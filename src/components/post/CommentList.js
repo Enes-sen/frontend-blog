@@ -6,8 +6,8 @@ import moment from "moment";
 
 const CommentList = ({ postId }) => {
   const dispatch = useDispatch();
-  const comments = useSelector((state) => state.posts.currentPost?.comments);
-  console.log(comments);
+  const currentPost = useSelector((state) => state.posts.currentPost);
+  const comments = currentPost?.comments || [];
 
   useEffect(() => {
     dispatch(fetchPostComments(postId));
@@ -17,16 +17,13 @@ const CommentList = ({ postId }) => {
     return moment(date).fromNow();
   };
 
-  if (!Array.isArray(comments)) {
-    return <div>Loading comments...</div>;
-  }
-
-  if (!comments.length) {
-    return <div>No comments yet.</div>;
+  if (!currentPost) {
+    return <div>Loading post...</div>;
   }
 
   return (
     <div className="comments">
+      {comments.length === 0 && <div>No comments yet.</div>}
       {comments.map((comment) => (
         <Card key={comment._id} className="mt-3">
           <CardBody>
