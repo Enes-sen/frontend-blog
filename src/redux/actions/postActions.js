@@ -74,9 +74,9 @@ export const addComment = (postId, comment) => async (dispatch) => {
 };
 
 // Bir posttan yorum sil
-export const deleteComment = (postId, commentId) => async (dispatch) => {
+export const deleteComment = async (commentId, postId) => {
   try {
-    await api.deleteComment(postId, commentId);
+    const response = await api.deleteComment(commentId, postId);
     dispatch({
       type: types.DELETE_COMMENT_SUCCESS,
       payload: { postId, commentId },
