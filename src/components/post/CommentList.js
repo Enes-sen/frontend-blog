@@ -17,32 +17,32 @@ const CommentList = ({ postId }) => {
     return moment(date).fromNow();
   };
 
-  const filteredComments = Array.isArray(comments) && comments.filter((comment) => comment.postId == postId);
-  console.log("filteredcomments-array:", filteredComments);
+  const comments = useSelector((state) => state.posts.currentPost?.comments);
+const filteredComments = Array.isArray(comments) && comments.filter((comment) => comment.postId === postId);
 
-  if (!comments) {
-    return <div>Loading comments...</div>;
-  }
+if (!Array.isArray(comments)) {
+  return <div>Loading comments...</div>;
+}
 
-  if (filteredComments.length === 0) {
-    return <div>Bu yazıya henüz yorum yapılmamış.</div>;
-  }
+if (!filteredComments.length) {
+  return <div>No comments yet.</div>;
+}
 
- return (
+return (
   <div className="comments">
     {filteredComments.map((comment) => (
-        <Card key={comment._id} className="mt-3">
-          <CardBody>
-            <CardTitle tag="h6">{comment.name}</CardTitle>
-            <CardSubtitle tag="h6" className="mb-2 text-muted">
-              {convertRelativeTime(comment.date)}
-            </CardSubtitle>
-            <p>{comment.comment}</p>
-          </CardBody>
-        </Card>
-      ))}
+      <Card key={comment._id} className="mt-3">
+        <CardBody>
+          <CardTitle tag="h6">{comment.name}</CardTitle>
+          <CardSubtitle tag="h6" className="mb-2 text-muted">
+            {convertRelativeTime(comment.date)}
+          </CardSubtitle>
+          <p>{comment.comment}</p>
+        </CardBody>
+      </Card>
+    ))}
   </div>
- );
+);
 };
 
 export default CommentList;
