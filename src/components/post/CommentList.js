@@ -16,7 +16,7 @@ const CommentList = ({ postId }) => {
     return moment(date).fromNow();
   };
 
-  const filteredComments = comments && comments.filter((comment) => comment.postId === postId);
+  const filteredComments = Array.isArray(comments) && comments.filter((comment) => comment.postId === postId);
    console.log("filteredcomments-array:", filteredComments);
 
   if (!filteredComments || filteredComments.length === 0) {
