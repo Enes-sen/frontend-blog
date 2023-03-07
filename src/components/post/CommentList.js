@@ -6,9 +6,8 @@ import moment from "moment";
 
 const CommentList = ({ postId }) => {
 const dispatch = useDispatch();
-const comments = useSelector((state) => state.posts.currentPost?.comments);
 
-console.log(comments);
+
 
 useEffect(() => {
 dispatch(fetchPostComments(postId));
@@ -17,7 +16,8 @@ dispatch(fetchPostComments(postId));
 const convertRelativeTime = (date) => {
 return moment(date).fromNow();
 };
-
+const comments = useSelector((state) => state.posts.currentPost?.comments);
+ console.log(comments);
 if (!Array.isArray(comments)) {
 return <div>Loading comments...</div>;
 }
