@@ -7,7 +7,7 @@ import moment from "moment";
 const CommentList = ({ postId }) => {
   const dispatch = useDispatch();
   const comments = useSelector((state) => state.posts.currentPost.comments);
-
+  console.log("comments-array:"+commments);
   useEffect(() => {
     dispatch(fetchComments(postId));
   }, [dispatch, postId]);
