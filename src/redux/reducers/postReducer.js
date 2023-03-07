@@ -95,4 +95,4 @@ const postReducer = (state = initialState, action) => {
   }
 };
 
-export default postReducer;
+export default postReducer; 
