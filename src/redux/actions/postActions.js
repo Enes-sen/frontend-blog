@@ -46,7 +46,7 @@ export const removePost = (id) => async (dispatch) => {
 };
 
 // Bir postun tüm yorumlarını getir
-export const fetchComments = (postId) => async (dispatch) => {
+export const fetchPostComments = (postId) => async (dispatch) => {
   try {
     const { data } = await api.getPostComments(postId);
     dispatch({
@@ -55,32 +55,35 @@ export const fetchComments = (postId) => async (dispatch) => {
     });
   } catch (error) {
     console.error(error);
-    dispatch({ type: types.GET_POST_COMMENTS_FAILURE, payload: error.message });
+    dispatch({
+      type: types.GET_POST_COMMENTS_FAILURE,
+      payload: error.message,
+    });
   }
 };
 
-// Bir posta yorum ekle
-export const addComment = (postId, comment) => async (dispatch) => {
+// Add a comment to a post by post id
+export const addComment = (comment, postId) => async (dispatch) => {
   try {
-    const { data } = await api.createComment(postId, comment);
+    const { data } = await api.createComment(comment, postId);
     dispatch({
       type: types.CREATE_COMMENT_SUCCESS,
       payload: { postId, comment: data },
     });
   } catch (error) {
     console.error(error);
-    dispatch({ type: types.CREATE_COMMENT_FAILURE, payload: error.message });
+    dispatch({
+      type: types.CREATE_COMMENT_FAILURE,
+      payload: error.message,
+    });
   }
 };
 
 // Bir posttan yorum sil
-export const deleteComment = async (commentId, postId) => {
+export const removeComment = (postId, commentId) => async (dispatch) => {
   try {
-    const response = await api.deleteComment(commentId, postId);
-    dispatch({
-      type: types.DELETE_COMMENT_SUCCESS,
-      payload: { postId, commentId },
-    });
+    await api.deleteComment(commentId, postId);
+    dispatch({ type: types.DELETE_COMMENT_SUCCESS, payload: { postId, commentId } });
   } catch (error) {
     console.error(error);
     dispatch({ type: types.DELETE_COMMENT_FAILURE, payload: error.message });
