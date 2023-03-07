@@ -21,7 +21,7 @@ const AddCommentForm = ({ postId }) => {
           comment: comment,
           postId: postId
         };
-        dispatch(addComment(newComment));
+        dispatch(addComment(postId,newComment));
         setName("");
         setComment("");
         alertify.success("Yorum kaydedildi", 3);
@@ -33,7 +33,6 @@ const AddCommentForm = ({ postId }) => {
 
   return (
     <div style={{ width: "80%", marginLeft: "10%", marginTop: "5%" }}>
-      <h2 className="text-center">Yorum Yap</h2>
       <Form onSubmit={handleSubmit}>
         <FormGroup>
           <Label for="name">İsim</Label>
