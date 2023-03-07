@@ -16,8 +16,7 @@ const CommentList = ({ postId }) => {
     return moment(date).fromNow();
   };
 
-  const filteredComments = comments?.filter((comment) => comment.postId === postId);
-
+  const filteredComments = comments && comments.filter((comment) => comment.postId === postId);
   return (
     <div className="comments">
       {filteredComments?.map((comment) => (
