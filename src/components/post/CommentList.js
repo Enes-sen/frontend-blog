@@ -12,19 +12,19 @@ const CommentList = ({ postId }) => {
     dispatch(fetchPostComments(postId));
   }, [dispatch, postId]);
 
-  const { comments } = useSelector((state) => state.posts);
+  const { currentPost } = useSelector((state) => state.posts);
 
   const convertRelativeTime = (date) => {
     return moment(date).fromNow();
   };
 
-  if (!comments?.length) {
+  if (!currentPost?.comments?.length) {
     return <div>Loading comments...</div>;
   }
 
   return (
     <div className="comments">
-      {comments
+      {currentPost.comments
         .sort((a, b) => new Date(b.date) - new Date(a.date))
         .map((comment) => (
           <Card key={comment._id} className="mt-3">
@@ -37,7 +37,7 @@ const CommentList = ({ postId }) => {
             </CardBody>
           </Card>
         ))}
-      {comments.length === 0 && <div>No comments yet.</div>}
+      {currentPost.comments.length === 0 && <div>No comments yet.</div>}
     </div>
   );
 };
