@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPostComments } from "../../redux/actions/postActions";
 import { Card, CardBody, CardSubtitle, CardTitle } from "reactstrap";
@@ -10,19 +11,21 @@ const CommentList = ({ postId }) => {
   useEffect(() => {
     dispatch(fetchPostComments(postId));
   }, [dispatch, postId]);
-  const comments = useSelector((state) => state.posts.comments);
+
+  const { comments } = useSelector((state) => state.posts);
+
   const convertRelativeTime = (date) => {
     return moment(date).fromNow();
   };
-  
 
-  if (!Array.isArray(comments)) {
+  if (!comments?.length) {
     return <div>Loading comments...</div>;
   }
+
   return (
     <div className="comments">
       {comments
-        .sort((a, b) => new Date(b.date) - new Date(a.date)) // sort the comments by date
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
         .map((comment) => (
           <Card key={comment._id} className="mt-3">
             <CardBody>
@@ -38,4 +41,9 @@ const CommentList = ({ postId }) => {
     </div>
   );
 };
+
+CommentList.propTypes = {
+  postId: PropTypes.string.isRequired,
+};
+
 export default CommentList;
