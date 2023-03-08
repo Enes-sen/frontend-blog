@@ -42,8 +42,5 @@ const CommentList = ({ postId }) => {
   );
 };
 
-CommentList.propTypes = {
-  postId: PropTypes.string.isRequired,
-};
 
 export default CommentList;
