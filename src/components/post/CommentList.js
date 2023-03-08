@@ -10,18 +10,15 @@ const CommentList = ({ postId }) => {
   useEffect(() => {
     dispatch(fetchPostComments(postId));
   }, [dispatch, postId]);
-
+  const comments = useSelector((state) => state.posts.comments);
   const convertRelativeTime = (date) => {
     return moment(date).fromNow();
   };
-
-  const comments = useSelector((state) => state.posts.comments);
-  console.log(comments);
+  
 
   if (!Array.isArray(comments)) {
     return <div>Loading comments...</div>;
   }
-
   return (
     <div className="comments">
       {comments
