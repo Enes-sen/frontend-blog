@@ -4,7 +4,6 @@ import * as api from "../../api/api";
 const initialState = {
   posts: [],
   currentPost: {},
-  comments: [],
 };
 
 const postReducer = (state = initialState, action) => {
