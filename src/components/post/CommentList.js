@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPostComments } from "../../redux/actions/postActions";
-import { Card, CardBody, CardSubtitle, CardTitle } from "reactstrap";
+import { Card, CardBody, CardSubtitle, CardTitle, Badge } from "reactstrap";
 import moment from "moment";
 
 const CommentList = ({ postId }) => {
@@ -32,6 +32,7 @@ const CommentList = ({ postId }) => {
               <CardTitle tag="h6">{comment.name}</CardTitle>
               <CardSubtitle tag="h6" className="mb-2 text-muted">
                 {convertRelativeTime(comment.date)}
+                <Badge className="ml-2" color="secondary">{moment(comment.date).format("YYYY-MM-DD")}</Badge>
               </CardSubtitle>
               <p>{comment.comment}</p>
             </CardBody>
@@ -42,5 +43,8 @@ const CommentList = ({ postId }) => {
   );
 };
 
+CommentList.propTypes = {
+  postId: PropTypes.string.isRequired,
+};
 
 export default CommentList;
