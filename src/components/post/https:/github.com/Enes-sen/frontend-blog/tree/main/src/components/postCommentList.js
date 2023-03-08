@@ -15,7 +15,7 @@ const CommentList = ({ postId }) => {
     return moment(date).fromNow();
   };
 
-  const comments = useSelector((state) => state.posts.currentPost?.comments);
+  const comments = useSelector((state) => state.posts.comments);
   console.log(comments);
 
   if (!Array.isArray(comments)) {
@@ -25,7 +25,7 @@ const CommentList = ({ postId }) => {
   return (
     <div className="comments">
       {comments
-        .filter((comment) => comment.postId === postId)
+        .sort((a, b) => new Date(b.date) - new Date(a.date)) // sort the comments by date
         .map((comment) => (
           <Card key={comment._id} className="mt-3">
             <CardBody>
@@ -41,5 +41,4 @@ const CommentList = ({ postId }) => {
     </div>
   );
 };
-
 export default CommentList;
