@@ -21,7 +21,7 @@ const AddCommentForm = ({ postId }) => {
           comment: comment,
           postId:postId
         };
-        dispatch(addComment(postId,newComment));
+        dispatch(addComment(newComment,postId));
         setName("");
         setComment("");
         alertify.success("Yorum kaydedildi", 3);
