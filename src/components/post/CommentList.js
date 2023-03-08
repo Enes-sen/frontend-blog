@@ -7,12 +7,11 @@ import moment from "moment";
 
 const CommentList = ({ postId }) => {
   const dispatch = useDispatch();
+  const { currentPost } = useSelector((state) => state.posts);
 
   useEffect(() => {
     dispatch(fetchPostComments(postId));
   }, [dispatch, postId]);
-
-  const { currentPost } = useSelector((state) => state.posts);
 
   const convertRelativeTime = (date) => {
     return moment(date).fromNow();
