@@ -33,11 +33,12 @@ const postReducer = (state = initialState, action) => {
         currentPost: {},
       };
     case types.GET_POST_COMMENTS_SUCCESS:
+      const comments = Array.isArray(action.payload.comments) ? action.payload.comments : [];
       const updatedPosts = state.posts.map((post) => {
         if (post._id === action.payload.postId) {
           return {
             ...post,
-            comments: action.payload.comments,
+            comments: comments,
           };
         }
         return post;
@@ -47,27 +48,28 @@ const postReducer = (state = initialState, action) => {
         posts: updatedPosts,
         currentPost: {
           ...state.currentPost,
-          comments: action.payload.comments,
+          comments: comments,
         },
       };
     case types.CREATE_COMMENT_SUCCESS:
-  const updatedPosts2 = state.posts.map((post) => {
-    if (post._id === action.payload.postId) {
+      const comment = action.payload.comment;
+      const updatedPosts2 = state.posts.map((post) => {
+        if (post._id === action.payload.postId) {
+          return {
+            ...post,
+            comments: [...post.comments, comment],
+          };
+        }
+        return post;
+      });
       return {
-        ...post,
-        comments: [...post.comments, action.payload.comment],
+        ...state,
+        posts: updatedPosts2,
+        currentPost: {
+          ...state.currentPost,
+          comments: [...state.currentPost.comments, comment],
+        },
       };
-    }
-    return post;
-  });
-  return {
-    ...state,
-    posts: updatedPosts2,
-    currentPost: {
-      ...state.currentPost,
-      comments: [...state.currentPost.comments, action.payload.comment],
-    },
-  };
     case types.DELETE_COMMENT_SUCCESS:
       const updatedPosts3 = state.posts.map((post) => {
         if (post._id === action.payload.postId) {
