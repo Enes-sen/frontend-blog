@@ -25,6 +25,7 @@ const AddCommentForm = ({ postId }) => {
         setName("");
         setComment("");
         alertify.success("Yorum kaydedildi", 3);
+        location.reload();
       }
     } catch (error) {
       alertify.error(`Kayıt esnasında oluşan hata: ${error}`, 3);
