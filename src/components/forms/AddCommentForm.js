@@ -10,27 +10,26 @@ const AddCommentForm = ({ postId }) => {
 
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    try {
-      if (name === "" || comment === "") {
-        alertify.error("Yorum kaydetme eksik bilgi nedeni ile başarısız!", 3);
-      } else {
-        const newComment = {
-          name: name,
-          comment: comment,
-          postId:postId
-        };
-        dispatch(addComment(newComment,postId));
-        setName("");
-        setComment("");
-        alertify.success("Yorum kaydedildi", 3);
-        window.location.reload();
-      }
-    } catch (error) {
-      alertify.error(`Kayıt esnasında oluşan hata: ${error}`, 3);
+const handleSubmit = (e) => {
+  e.preventDefault();
+  try {
+    if (name === "" || comment === "") {
+      alertify.error("Yorum kaydetme eksik bilgi nedeni ile başarısız!", 3);
+    } else {
+      const newComment = {
+        name: name,
+        comment: comment,
+        postId: postId,
+      };
+      dispatch(addComment(newComment, postId));
+      setName("");
+      setComment("");
+      alertify.success("Yorum kaydedildi", 3);
     }
-  };
+  } catch (error) {
+    alertify.error(`Kayıt esnasında oluşan hata: ${error}`, 3);
+  }
+};
 
   return (
     <div style={{ width: "80%", marginLeft: "10%", marginTop: "5%" }}>
