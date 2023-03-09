@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPostComments, deleteComment } from "../../redux/actions/postActions";
+import { fetchPostComments, removeComment } from "../../redux/actions/postActions";
 import { Card, CardBody, CardSubtitle, CardTitle, Badge, CardText, Button } from "reactstrap";
 import moment from "moment";
 import "moment/locale/tr";
@@ -19,7 +19,7 @@ const CommentList = ({ postId }) => {
   };
 
   const handleDeleteComment = (commentId) => {
-    dispatch(deleteComment(postId, commentId));
+    dispatch(removeComment(postId, commentId));
   };
 
   if (!comments || comments.length === 0) {
