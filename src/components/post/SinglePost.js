@@ -15,6 +15,7 @@ Badge,
 import noImage from "../../images/download.png";
 import CommentList from "./CommentList";
 import AddCommentForm from "../forms/AddCommentForm";
+import "moment/locale/tr";
 
 const SinglePost = () => {
 const { id } = useParams();
@@ -27,9 +28,8 @@ dispatch(fetchSinglePost(id));
 }, [dispatch, id]);
 
 const convertRelativeTime = (date) => {
-moment.locale('tr');
-return moment(date).format('lll');
-};
+    return moment(date).locale('tr').format('lll');
+  };
 
 const handleDelete = () => {
 if (window.confirm("Bu gönderiyi silmek istediğinize emin misiniz?")) {
