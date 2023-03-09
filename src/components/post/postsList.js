@@ -13,15 +13,15 @@ import {
   Badge,
 } from "reactstrap";
 import noImage from "../../images/download.png";
+import "moment/locale/tr";
 
 const PostsList = () => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.posts);
-  const convertRelativeTime = (date) => {
-   moment.locale('tr');
-   return moment(date).format('lll');
-};
+   const convertRelativeTime = (date) => {
+    return moment(date).locale('tr').format('lll');
+  };
 
   useEffect(() => {
     dispatch(fetchPosts())
