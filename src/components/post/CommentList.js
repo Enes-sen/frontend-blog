@@ -25,12 +25,16 @@ const CommentList = ({ postId }) => {
   if (!comments || comments.length === 0) {
     return <div>Loading comments...</div>;
   }
+   if (!Array.isArray(comments)) {
+    return <div>Gösterilecek yorum yok</div>;
+  }
 
   return (
     <div className="comments">
       {comments
         .sort((a, b) => new Date(b.date) - new Date(a.date))
-        .map((comment) => (
+        .map((comment,index) => (
+          <React.Fragment key={index}>
           <Card key={comment?._id} className="mt-3">
             <CardBody>
               <CardTitle tag="h6">{comment?.name}</CardTitle>
@@ -42,9 +46,11 @@ const CommentList = ({ postId }) => {
                 Delete Comment
               </Button>
             </CardBody>
-          </Card>
+          </Card> 
+           {index < comments.length - 1 && <div style={{ height: "50px" }}></div>}
+          {/* add space between posts */}
+          </React.Fragment>
         ))}
-      {comments.length === 0 && <div>No comments yet.</div>}
     </div>
   );
 };
