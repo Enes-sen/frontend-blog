@@ -26,6 +26,7 @@ const CommentList = ({ postId }) => {
       {currentPost.comments
         .sort((a, b) => new Date(b.date) - new Date(a.date))
         .map((comment) => (
+          console.log(comment);
           <Card key={comment._id} className="mt-3">
             <CardBody>
               <CardTitle tag="h6">{comment.name}</CardTitle>
