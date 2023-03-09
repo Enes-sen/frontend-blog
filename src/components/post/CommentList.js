@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPostComments } from "../../redux/actions/postActions";
+import { fetchPostComments, deleteComment } from "../../redux/actions/postActions";
 import { Card, CardBody, CardSubtitle, CardTitle, Badge, CardText, Button } from "reactstrap";
 import moment from "moment";
 import "moment/locale/tr";
@@ -18,13 +18,13 @@ const CommentList = ({ postId }) => {
     return moment(date).locale('tr').format('lll');
   };
 
+  const handleDeleteComment = (commentId) => {
+    dispatch(deleteComment(postId, commentId));
+  };
+
   if (!comments || comments.length === 0) {
     return <div>Loading comments...</div>;
   }
-  if (comments && comments.length > 0) {
-  console.log('First comment name:', comments[0].name);
-  console.log('First comment content:', comments[0].comment);
-}
 
   return (
     <div className="comments">
@@ -38,7 +38,7 @@ const CommentList = ({ postId }) => {
                 <Badge className="ml-2" color="secondary">{convertRelativeTime(comment?.date)}</Badge>
               </CardSubtitle>
               <CardText>{comment?.comment}</CardText>
-              <Button color="danger">
+              <Button color="danger" onClick={() => handleDeleteComment(comment._id)}>
                 Delete Comment
               </Button>
             </CardBody>
