@@ -7,7 +7,7 @@ import moment from "moment";
 
 const CommentList = ({ postId }) => {
   const dispatch = useDispatch();
-  const { currentPost.comments } = useSelector((state) => state.posts);
+  const { comments } = useSelector((state) => state.posts.currentPost);
 
   useEffect(() => {
     dispatch(fetchPostComments(postId));
@@ -19,12 +19,13 @@ const CommentList = ({ postId }) => {
     return moment(date).format('lll');
   };
 
-  if (!currentPost?.comments?.length) {
+  if (!comments?.length) {
     return <div>Loading comments...</div>;
   }
+
   return (
     <div className="comments">
-      {currentPost.comments
+      {comments
         .sort((a, b) => new Date(b.date) - new Date(a.date))
         .map((comment) => (
           <Card key={comment?._id} className="mt-3">
@@ -40,7 +41,7 @@ const CommentList = ({ postId }) => {
             </CardBody>
           </Card>
         ))}
-      {currentPost.comments.length === 0 && <div>No comments yet.</div>}
+      <div>No comments yet.</div>
     </div>
   );
 };
