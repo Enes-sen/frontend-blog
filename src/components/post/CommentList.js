@@ -18,7 +18,7 @@ const CommentList = ({ postId }) => {
     return moment(date).fromNow();
   };
   if (currentPost && currentPost.comments && currentPost.comments.length > 0) {
-  console.log(currentPost.comments[0]);
+  console.log(currentPost.comments[0].name);
 }
 
   if (!currentPost?.comments?.length) {
@@ -29,13 +29,13 @@ const CommentList = ({ postId }) => {
       {currentPost.comments
         .sort((a, b) => new Date(b.date) - new Date(a.date))
         .map((comment) => (
-          <Card key={comment._id} className="mt-3">
+          <Card key={comment?._id} className="mt-3">
             <CardBody>
-              <CardTitle tag="h6">{comment.name}</CardTitle>
+              <CardTitle tag="h6">{comment?.name}</CardTitle>
               <CardSubtitle tag="h6" className="mb-2 text-muted">
-                <Badge className="ml-2" color="secondary">{moment(comment.date).format("YYYY-MM-DD")}</Badge>
+                <Badge className="ml-2" color="secondary">{moment(comment?.date).format("YYYY-MM-DD")}</Badge>
               </CardSubtitle>
-              <CardText>{comment.comment}</CardText>
+              <CardText>{comment?.comment}</CardText>
               <Button color="danger">
                 yorum'u sil
               </Button>
