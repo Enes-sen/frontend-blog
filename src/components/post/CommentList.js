@@ -17,11 +17,11 @@ const CommentList = ({ postId }) => {
   const convertRelativeTime = (date) => {
     return moment(date).fromNow();
   };
+  console.log(currentPost.comments[0]);
 
   if (!currentPost?.comments?.length) {
     return <div>Loading comments...</div>;
   }
-console.log(currentPost.comments);
   return (
     <div className="comments">
       {currentPost.comments
