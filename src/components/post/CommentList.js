@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPostComments } from "../../redux/actions/postActions";
 import { Card, CardBody, CardSubtitle, CardTitle, Badge, CardText, Button } from "reactstrap";
 import moment from "moment";
+import "moment/locale/tr";
 
 const CommentList = ({ postId }) => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const CommentList = ({ postId }) => {
   }, [dispatch, postId]);
 
   const convertRelativeTime = (date) => {
-    return moment(date).format('lll').locale('tr');
+    return moment(date).locale('tr').format('lll');
   };
 
   if (!comments || comments.length === 0) {
