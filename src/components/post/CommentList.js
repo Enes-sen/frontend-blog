@@ -12,7 +12,7 @@ const CommentList = ({ postId }) => {
   useEffect(() => {
     dispatch(fetchPostComments(postId));
   }, [dispatch, postId]);
-  console.log(currentPost.comments[0]);
+ 
 
   const convertRelativeTime = (date) => {
     return moment(date).fromNow();
@@ -21,7 +21,7 @@ const CommentList = ({ postId }) => {
   if (!currentPost?.comments?.length) {
     return <div>Loading comments...</div>;
   }
-
+console.log(currentPost.comments);
   return (
     <div className="comments">
       {currentPost.comments
