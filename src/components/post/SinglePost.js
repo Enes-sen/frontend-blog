@@ -27,7 +27,8 @@ dispatch(fetchSinglePost(id));
 }, [dispatch, id]);
 
 const convertRelativeTime = (date) => {
-return moment(date).fromNow();
+moment.locale('tr');
+return moment(date).format('lll');
 };
 
 const handleDelete = () => {
