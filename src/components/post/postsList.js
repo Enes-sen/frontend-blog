@@ -19,8 +19,9 @@ const PostsList = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.posts);
   const convertRelativeTime = (date) => {
-    return moment(date).fromNow(); // tarihi "x zaman önce" formatında döndürür
-  };
+   moment.locale('tr');
+   return moment(date).format('lll');
+};
 
   useEffect(() => {
     dispatch(fetchPosts())
