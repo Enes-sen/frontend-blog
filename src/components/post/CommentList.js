@@ -7,19 +7,17 @@ import moment from "moment";
 
 const CommentList = ({ postId }) => {
   const dispatch = useDispatch();
-  const { comments } = useSelector((state) => state.posts.currentPost);
+  const comments = useSelector(state => state.posts.currentPost.comments);
 
   useEffect(() => {
     dispatch(fetchPostComments(postId));
   }, [dispatch, postId]);
- 
 
   const convertRelativeTime = (date) => {
-    moment.locale('tr');
-    return moment(date).format('lll');
+    return moment(date).format('lll').locale('tr');
   };
 
-  if (!comments?.length) {
+  if (!comments || comments.length === 0) {
     return <div>Loading comments...</div>;
   }
 
@@ -41,7 +39,7 @@ const CommentList = ({ postId }) => {
             </CardBody>
           </Card>
         ))}
-      <div>No comments yet.</div>
+      {comments.length === 0 && <div>No comments yet.</div>}
     </div>
   );
 };
