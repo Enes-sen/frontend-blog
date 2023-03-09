@@ -21,6 +21,10 @@ const CommentList = ({ postId }) => {
   if (!comments || comments.length === 0) {
     return <div>Loading comments...</div>;
   }
+  if (comments && comments.length > 0) {
+  console.log('First comment name:', comments[0].name);
+  console.log('First comment content:', comments[0].comment);
+}
 
   return (
     <div className="comments">
@@ -35,7 +39,7 @@ const CommentList = ({ postId }) => {
               </CardSubtitle>
               <CardText>{comment?.comment}</CardText>
               <Button color="danger">
-                yorum'u sil
+                Delete Comment
               </Button>
             </CardBody>
           </Card>
