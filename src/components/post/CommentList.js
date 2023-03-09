@@ -7,7 +7,7 @@ import moment from "moment";
 
 const CommentList = ({ postId }) => {
   const dispatch = useDispatch();
-  const { currentPost } = useSelector((state) => state.posts);
+  const { currentPost.comments } = useSelector((state) => state.posts);
 
   useEffect(() => {
     dispatch(fetchPostComments(postId));
@@ -15,11 +15,9 @@ const CommentList = ({ postId }) => {
  
 
   const convertRelativeTime = (date) => {
-    return moment(date).fromNow();
+    moment.locale('tr');
+    return moment(date).format('lll');
   };
-  if (currentPost && currentPost.comments && currentPost.comments.length > 0) {
-  console.log(currentPost.comments[0].name);
-}
 
   if (!currentPost?.comments?.length) {
     return <div>Loading comments...</div>;
@@ -33,7 +31,7 @@ const CommentList = ({ postId }) => {
             <CardBody>
               <CardTitle tag="h6">{comment?.name}</CardTitle>
               <CardSubtitle tag="h6" className="mb-2 text-muted">
-                <Badge className="ml-2" color="secondary">{moment(comment?.date).format("YYYY-MM-DD")}</Badge>
+                <Badge className="ml-2" color="secondary">{convertRelativeTime(comment?.date)}</Badge>
               </CardSubtitle>
               <CardText>{comment?.comment}</CardText>
               <Button color="danger">
