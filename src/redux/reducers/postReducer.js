@@ -1,5 +1,4 @@
 import * as types from "../actions/actionTypes";
-import * as api from "../../api/api";
 
 const initialState = {
   posts: [],
