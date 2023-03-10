@@ -18,7 +18,7 @@ import {
 const initialState = {
   posts: [],
   singlePost: null,
-  postComments: {},
+  postComments: [],
 };
 
 const postReducer = (state = initialState, action) => {
