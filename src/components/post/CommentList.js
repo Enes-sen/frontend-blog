@@ -8,7 +8,7 @@ import "moment/locale/tr";
 
 const CommentList = ({ postId }) => {
   const dispatch = useDispatch();
-  const comments = useSelector(state => state.posts.postComments);
+  const comments = useSelector(state => state.post.postComments);
 
   useEffect(() => {
     dispatch(fetchPostComments(postId));
