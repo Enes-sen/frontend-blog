@@ -1,9 +1,9 @@
-import * as types from "../actions/actionTypes";
+import * as types from "./actionTypes";
 
 const initialState = {
   posts: [],
-  currentPost: {},
-  comments: [],
+  singlePost: null,
+  postComments: {},
 };
 
 const postReducer = (state = initialState, action) => {
@@ -13,90 +13,71 @@ const postReducer = (state = initialState, action) => {
         ...state,
         posts: action.payload,
       };
+    case types.GET_POSTS_FAILURE:
+      console.error(action.payload);
+      return state;
     case types.GET_SINGLE_POST_SUCCESS:
       return {
         ...state,
-        currentPost: action.payload,
+        singlePost: action.payload,
       };
+    case types.GET_SINGLE_POST_FAILURE:
+      console.error(action.payload);
+      return state;
     case types.CREATE_POST_SUCCESS:
       return {
         ...state,
-        posts: [...state.posts, action.payload],
+        posts: [action.payload, ...state.posts],
       };
+    case types.CREATE_POST_FAILURE:
+      console.error(action.payload);
+      return state;
     case types.DELETE_POST_SUCCESS:
-      const filteredPosts = state.posts.filter(
-        (post) => post._id !== action.payload
-      );
       return {
         ...state,
-        posts: filteredPosts,
-        currentPost: {},
+        posts: state.posts.filter((post) => post.id !== action.payload),
       };
+    case types.DELETE_POST_FAILURE:
+      console.error(action.payload);
+      return state;
     case types.GET_POST_COMMENTS_SUCCESS:
-      const comments = Array.isArray(action.payload.comments) ? action.payload.comments : [];
-      const updatedPosts = state.posts.map((post) => {
-        if (post._id === action.payload.postId) {
-          return {
-            ...post,
-            comments: comments,
-          };
-        }
-        return post;
-      });
       return {
         ...state,
-        posts: updatedPosts,
-        currentPost: {
-          ...state.currentPost,
-          comments: comments,
+        postComments: {
+          ...state.postComments,
+          [action.payload.postId]: action.payload.comments,
         },
-        comments: comments,
       };
+    case types.GET_POST_COMMENTS_FAILURE:
+      console.error(action.payload);
+      return state;
     case types.CREATE_COMMENT_SUCCESS:
-      const comment = action.payload.comment;
-      const updatedPosts2 = state.posts.map((post) => {
-        if (post._id === action.payload.postId) {
-          return {
-            ...post,
-            comments: [...post.comments, comment],
-          };
-        }
-        return post;
-      });
       return {
         ...state,
-        posts: updatedPosts2,
-        currentPost: {
-          ...state.currentPost,
-          comments: [...state.currentPost.comments, comment],
+        postComments: {
+          ...state.postComments,
+          [action.payload.postId]: [
+            action.payload.comment,
+            ...(state.postComments[action.payload.postId] || []),
+          ],
         },
-        comments: [...state.comments, comment],
       };
+    case types.CREATE_COMMENT_FAILURE:
+      console.error(action.payload);
+      return state;
     case types.DELETE_COMMENT_SUCCESS:
-      const updatedPosts3 = state.posts.map((post) => {
-        if (post._id === action.payload.postId) {
-          return {
-            ...post,
-            comments: post.comments.filter(
-              (comment) => comment._id !== action.payload.commentId
-            ),
-          };
-        }
-        return post;
-      });
       return {
         ...state,
-        posts: updatedPosts3,
-        currentPost: {
-          ...state.currentPost,
-          comments: state.currentPost.comments.filter(
-            (comment) => comment._id !== action.payload.commentId
+        postComments: {
+          ...state.postComments,
+          [action.payload.postId]: state.postComments[action.payload.postId].filter(
+            (comment) => comment.id !== action.payload.commentId
           ),
         },
-        comments: state.comments.filter(
-          (comment) => comment._id !== action.payload.commentId
-        ),
       };
+    case types.DELETE_COMMENT_FAILURE:
+      console.error(action.payload);
+      return state;
     default:
       return state;
   }
