@@ -47,7 +47,7 @@ const postReducer = (state = initialState, action) => {
     case CREATE_POST_FAILURE:
       console.error(action.payload);
       return state;
-    case types.DELETE_POST_SUCCESS:
+    case DELETE_POST_SUCCESS:
       return {
         ...state,
         posts: state.posts.filter((post) => post.id !== action.payload),
@@ -80,7 +80,7 @@ const postReducer = (state = initialState, action) => {
     case CREATE_COMMENT_FAILURE:
       console.error(action.payload);
       return state;
-    case types.DELETE_COMMENT_SUCCESS:
+    case DELETE_COMMENT_SUCCESS:
       return {
         ...state,
         postComments: {
