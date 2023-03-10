@@ -1,14 +1,29 @@
-import * as types from "./actionTypes";
+import {
+  GET_POSTS_SUCCESS,
+  GET_POSTS_FAILURE,
+  GET_SINGLE_POST_SUCCESS,
+  GET_SINGLE_POST_FAILURE,
+  CREATE_POST_SUCCESS,
+  CREATE_POST_FAILURE,
+  DELETE_POST_SUCCESS,
+  DELETE_POST_FAILURE,
+  GET_POST_COMMENTS_SUCCESS,
+  GET_POST_COMMENTS_FAILURE,
+  CREATE_COMMENT_SUCCESS,
+  CREATE_COMMENT_FAILURE,
+  DELETE_COMMENT_SUCCESS,
+  DELETE_COMMENT_FAILURE,
+} from "./actionTypes";
 import * as api from "../../api/api";
 
 // Tüm postları getir
 export const fetchPosts = () => async (dispatch) => {
   try {
     const { data } = await api.getPosts();
-    dispatch({ type: types.GET_POSTS_SUCCESS, payload: data });
+    dispatch({ type: GET_POSTS_SUCCESS, payload: data });
   } catch (error) {
     console.error(error);
-    dispatch({ type: types.GET_POSTS_FAILURE, payload: error.message });
+    dispatch({ type: GET_POSTS_FAILURE, payload: error.message });
   }
 };
 
@@ -16,10 +31,10 @@ export const fetchPosts = () => async (dispatch) => {
 export const fetchSinglePost = (id) => async (dispatch) => {
   try {
     const { data } = await api.getSinglePost(id);
-    dispatch({ type: types.GET_SINGLE_POST_SUCCESS, payload: data });
+    dispatch({ type: GET_SINGLE_POST_SUCCESS, payload: data });
   } catch (error) {
     console.error(error);
-    dispatch({ type: types.GET_SINGLE_POST_FAILURE, payload: error.message });
+    dispatch({ type: GET_SINGLE_POST_FAILURE, payload: error.message });
   }
 };
 
@@ -27,10 +42,10 @@ export const fetchSinglePost = (id) => async (dispatch) => {
 export const addPost = (post) => async (dispatch) => {
   try {
     const { data } = await api.createPost(post);
-    dispatch({ type: types.CREATE_POST_SUCCESS, payload: data });
+    dispatch({ type: CREATE_POST_SUCCESS, payload: data });
   } catch (error) {
     console.error(error);
-    dispatch({ type: types.CREATE_POST_FAILURE, payload: error.message });
+    dispatch({ type: CREATE_POST_FAILURE, payload: error.message });
   }
 };
 
@@ -38,10 +53,10 @@ export const addPost = (post) => async (dispatch) => {
 export const removePost = (id) => async (dispatch) => {
   try {
     await api.deletePost(id);
-    dispatch({ type: types.DELETE_POST_SUCCESS, payload: id });
+    dispatch({ type: DELETE_POST_SUCCESS, payload: id });
   } catch (error) {
     console.error(error);
-    dispatch({ type: types.DELETE_POST_FAILURE, payload: error.message });
+    dispatch({ type: DELETE_POST_FAILURE, payload: error.message });
   }
 };
 
@@ -50,13 +65,13 @@ export const fetchPostComments = (postId) => async (dispatch) => {
   try {
     const { data } = await api.getPostComments(postId);
     dispatch({
-      type: types.GET_POST_COMMENTS_SUCCESS,
+      type: GET_POST_COMMENTS_SUCCESS,
       payload: { postId, comments: data },
     });
   } catch (error) {
     console.error(error);
     dispatch({
-      type: types.GET_POST_COMMENTS_FAILURE,
+      type: GET_POST_COMMENTS_FAILURE,
       payload: error.message,
     });
   }
@@ -67,13 +82,13 @@ export const addComment = (comment, postId) => async (dispatch) => {
   try {
     const { data } = await api.createComment(comment, postId);
     dispatch({
-      type: types.CREATE_COMMENT_SUCCESS,
+      type: CREATE_COMMENT_SUCCESS,
       payload: { postId, comment: data },
     });
   } catch (error) {
     console.error(error);
     dispatch({
-      type: types.CREATE_COMMENT_FAILURE,
+      type: CREATE_COMMENT_FAILURE,
       payload: error.message,
     });
   }
@@ -83,9 +98,9 @@ export const addComment = (comment, postId) => async (dispatch) => {
 export const removeComment = (postId, commentId) => async (dispatch) => {
   try {
     await api.deleteComment(commentId, postId);
-    dispatch({ type: types.DELETE_COMMENT_SUCCESS, payload: { postId, commentId } });
+    dispatch({ type: DELETE_COMMENT_SUCCESS, payload: { postId, commentId } });
   } catch (error) {
     console.error(error);
-    dispatch({ type: types.DELETE_COMMENT_FAILURE, payload: error.message });
+    dispatch({ type: DELETE_COMMENT_FAILURE, payload: error.message });
   }
 };
