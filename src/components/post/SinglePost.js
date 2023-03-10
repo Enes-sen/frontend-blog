@@ -20,7 +20,7 @@ import "moment/locale/tr";
 const SinglePost = () => {
 const { id } = useParams();
 const dispatch = useDispatch();
-const currentPost = useSelector((state) => state.posts.currentPost);
+const currentPost = useSelector((state) => state.posts.singlePost);
 const postId = id;
 
 useEffect(() => {
