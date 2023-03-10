@@ -66,10 +66,7 @@ const postReducer = (state = initialState, action) => {
     case GET_POST_COMMENTS_FAILURE:
       console.error(action.payload);
       return state;
-   case CREATE_COMMENT_SUCCESS:
-  if (!action.payload.postId) {
-    return state;
-  }
+  case CREATE_COMMENT_SUCCESS:
   return {
     ...state,
     postComments: {
