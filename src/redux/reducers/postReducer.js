@@ -1,4 +1,19 @@
-import * as types from "../actions/actionTypes";
+import {
+  GET_POSTS_SUCCESS,
+  GET_POSTS_FAILURE,
+  GET_SINGLE_POST_SUCCESS,
+  GET_SINGLE_POST_FAILURE,
+  CREATE_POST_SUCCESS,
+  CREATE_POST_FAILURE,
+  DELETE_POST_SUCCESS,
+  DELETE_POST_FAILURE,
+  GET_POST_COMMENTS_SUCCESS,
+  GET_POST_COMMENTS_FAILURE,
+  CREATE_COMMENT_SUCCESS,
+  CREATE_COMMENT_FAILURE,
+  DELETE_COMMENT_SUCCESS,
+  DELETE_COMMENT_FAILURE,
+} from "../actions/actionTypes";
 
 const initialState = {
   posts: [],
@@ -8,28 +23,28 @@ const initialState = {
 
 const postReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.GET_POSTS_SUCCESS:
+    case GET_POSTS_SUCCESS:
       return {
         ...state,
         posts: action.payload,
       };
-    case types.GET_POSTS_FAILURE:
+    case GET_POSTS_FAILURE:
       console.error(action.payload);
       return state;
-    case types.GET_SINGLE_POST_SUCCESS:
+    case GET_SINGLE_POST_SUCCESS:
       return {
         ...state,
         singlePost: action.payload,
       };
-    case types.GET_SINGLE_POST_FAILURE:
+    case GET_SINGLE_POST_FAILURE:
       console.error(action.payload);
       return state;
-    case types.CREATE_POST_SUCCESS:
+    case CREATE_POST_SUCCESS:
       return {
         ...state,
         posts: [action.payload, ...state.posts],
       };
-    case types.CREATE_POST_FAILURE:
+    case CREATE_POST_FAILURE:
       console.error(action.payload);
       return state;
     case types.DELETE_POST_SUCCESS:
@@ -37,10 +52,10 @@ const postReducer = (state = initialState, action) => {
         ...state,
         posts: state.posts.filter((post) => post.id !== action.payload),
       };
-    case types.DELETE_POST_FAILURE:
+    case DELETE_POST_FAILURE:
       console.error(action.payload);
       return state;
-    case types.GET_POST_COMMENTS_SUCCESS:
+    case GET_POST_COMMENTS_SUCCESS:
       return {
         ...state,
         postComments: {
@@ -48,10 +63,10 @@ const postReducer = (state = initialState, action) => {
           [action.payload.postId]: action.payload.comments,
         },
       };
-    case types.GET_POST_COMMENTS_FAILURE:
+    case GET_POST_COMMENTS_FAILURE:
       console.error(action.payload);
       return state;
-    case types.CREATE_COMMENT_SUCCESS:
+    case CREATE_COMMENT_SUCCESS:
       return {
         ...state,
         postComments: {
@@ -62,7 +77,7 @@ const postReducer = (state = initialState, action) => {
           ],
         },
       };
-    case types.CREATE_COMMENT_FAILURE:
+    case CREATE_COMMENT_FAILURE:
       console.error(action.payload);
       return state;
     case types.DELETE_COMMENT_SUCCESS:
@@ -75,7 +90,7 @@ const postReducer = (state = initialState, action) => {
           ),
         },
       };
-    case types.DELETE_COMMENT_FAILURE:
+    case DELETE_COMMENT_FAILURE:
       console.error(action.payload);
       return state;
     default:
