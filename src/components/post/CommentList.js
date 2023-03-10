@@ -27,6 +27,7 @@ return <div>Loading comments...</div>;
 }
 
 return (
+
 <div className="comments">
 {comments.length > 0 ? (
 comments
@@ -46,17 +47,16 @@ Delete Comment
 </CardBody>
 </Card>
 {index < comments.length - 1 && <div style={{ height: "50px" }}></div>}
-{/* add space between posts /}
+{/* add space between posts */}
 </React.Fragment>
 ))
 ) : (
 <div>No comments to show.</div>
 )}
-{console.log(comments)} {/ Yorumları Console'da görmek için bu satırı ekledik */}
+{console.log(comments)} {/* Yorumları Console'da görmek için bu satırı ekledik */}
 </div>
 );
 };
-
 CommentList.propTypes = {
 postId: PropTypes.string.isRequired,
 };
