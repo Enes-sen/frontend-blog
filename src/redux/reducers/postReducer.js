@@ -3,6 +3,7 @@ import * as types from "../actions/actionTypes";
 const initialState = {
   posts: [],
   currentPost: {},
+  comments: [],
 };
 
 const postReducer = (state = initialState, action) => {
@@ -49,6 +50,7 @@ const postReducer = (state = initialState, action) => {
           ...state.currentPost,
           comments: comments,
         },
+        comments: comments,
       };
     case types.CREATE_COMMENT_SUCCESS:
       const comment = action.payload.comment;
@@ -68,6 +70,7 @@ const postReducer = (state = initialState, action) => {
           ...state.currentPost,
           comments: [...state.currentPost.comments, comment],
         },
+        comments: [...state.comments, comment],
       };
     case types.DELETE_COMMENT_SUCCESS:
       const updatedPosts3 = state.posts.map((post) => {
@@ -90,6 +93,9 @@ const postReducer = (state = initialState, action) => {
             (comment) => comment._id !== action.payload.commentId
           ),
         },
+        comments: state.comments.filter(
+          (comment) => comment._id !== action.payload.commentId
+        ),
       };
     default:
       return state;
