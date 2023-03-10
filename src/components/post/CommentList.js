@@ -9,7 +9,6 @@ import "moment/locale/tr";
 const CommentList = ({ postId }) => {
   const dispatch = useDispatch();
   const comments = useSelector(state => state.posts.currentPost.comments);
-  console.log(comments.[0].comment);
 
   useEffect(() => {
     dispatch(fetchPostComments(postId));
@@ -36,7 +35,7 @@ const CommentList = ({ postId }) => {
         .sort((a, b) => new Date(b.date) - new Date(a.date))
         .map((comment,index) => (
           <React.Fragment key={index}>
-          <Card key={comment?._id} className="mt-3">
+          <Card className="mt-3">
             <CardBody>
               <CardTitle tag="h6">{comment?.name}</CardTitle>
               <CardSubtitle tag="h6" className="mb-2 text-muted">
@@ -52,6 +51,7 @@ const CommentList = ({ postId }) => {
           {/* add space between posts */}
           </React.Fragment>
         ))}
+      {console.log(comments)} {/* Yorumları Console'da görmek için bu satırı ekledik */}
     </div>
   );
 };
