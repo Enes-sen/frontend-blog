@@ -5,7 +5,7 @@ import { Card, CardBody, CardTitle, CardText, Badge } from "reactstrap";
 import moment from "moment";
 import "moment/locale/tr";
 
-const PostComments = ({ postId }) => {
+const CommentList = ({ postId }) => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const comments = useSelector((state) => state.posts.postComments);
@@ -65,4 +65,4 @@ const PostComments = ({ postId }) => {
   );
 };
 
-export default PostComments;
+export default CommentList;
