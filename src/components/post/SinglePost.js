@@ -74,7 +74,7 @@ Kaldır
 </CardBody>
 </Card>
 <AddCommentForm postId={postId}/>
-<CommentList postId={postId} />
+<CommentList/>
 </div>
 );
 };
