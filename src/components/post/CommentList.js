@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { fetchPostComments } from "../../redux/actions/postActions";
 import { Card, CardBody, CardTitle, CardText, Badge } from "reactstrap";
 import moment from "moment";
