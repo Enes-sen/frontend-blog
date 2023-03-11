@@ -1,90 +1,68 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPosts } from "../../redux/actions/postActions";
-import { Link } from "react-router-dom";
+import { fetchPostComments } from "../../redux/actions/commentActions";
+import { Card, CardBody, CardTitle, CardText, Badge } from "reactstrap";
 import moment from "moment";
-import {
-  Card,
-  CardBody,
-  CardSubtitle,
-  CardTitle,
-  CardText,
-  CardImg,
-  Badge,
-} from "reactstrap";
-import noImage from "../../images/download.png";
 import "moment/locale/tr";
 
-const PostsList = () => {
+const PostComments = ({ postId }) => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.posts.posts);
-   const convertRelativeTime = (date) => {
+  const comments = useSelector((state) => state.comments.comments);
+
+  const convertRelativeTime = (date) => {
     return moment(date).locale('tr').format('lll');
   };
 
   useEffect(() => {
-    dispatch(fetchPosts())
+    dispatch(fetchPostComments(postId))
       .then(() => setLoading(false))
       .catch((error) => {
         console.log(error);
         setLoading(false);
       });
-  }, [dispatch]);
+  }, [dispatch, postId]);
 
   if (loading) {
     return <div>Yükleniyor...</div>;
   }
 
-  if (!Array.isArray(posts)) {
-    return <div>Gösterilecek gönderi yok</div>;
+  if (!Array.isArray(comments)) {
+    return <div>Bu gönderiye ait yorum yok</div>;
   }
-  
- return (
-  <div
-    className="Container-fluid mt-5"
-    style={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      position: "relative", // set position to relative
-      marginTop: "45%",
-      marginBottom: "160px",
-      height: "600px",
-      width: "80%", // set width
-      margin: "0 auto",
-    }}
-  >
-    {/* map over the posts */}
-    {posts
-      .sort((a, b) => new Date(b.date) - new Date(a.date))
-      .map((post, index) => (
+
+  return (
+    <div
+      className="Container-fluid mt-5"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        position: "relative",
+        marginTop: "45%",
+        marginBottom: "160px",
+        height: "600px",
+        width: "80%",
+        margin: "0 auto",
+      }}
+    >
+      {comments.map((comment, index) => (
         <React.Fragment key={index}>
-          <Card className="mt-5" style={{ width: "100%",  margin: "0 auto", marginTop:"200px",marginBottom:"200px", padding: "10px" }}>
-            <CardImg
-              alt="Card image cap"
-              src={post.image || noImage}
-              style={{
-                height: "600px",
-              }}
-              top
-              width="100%"
-            />
+          <Card
+            className="mt-5"
+            style={{ width: "100%", margin: "0 auto", padding: "10px" }}
+          >
             <CardBody>
-              <CardTitle tag="h5">{post.title}</CardTitle>
-              <Badge color="primary">{convertRelativeTime(post.date)}</Badge>
-              <CardText>{post.content}</CardText>
-              <Link className="btn btn-primary" to={`/posts/${post._id}`}>
-                daha fazla
-              </Link>
+              <CardTitle tag="h5">{comment.author}</CardTitle>
+              <Badge color="primary">{convertRelativeTime(comment.date)}</Badge>
+              <CardText>{comment.content}</CardText>
             </CardBody>
           </Card>
-          {index < posts.length - 1 && <div style={{ height: "50px" }}></div>}
-          {/* add space between posts */}
+          {index < comments.length - 1 && <div style={{ height: "50px" }}></div>}
         </React.Fragment>
       ))}
-  </div>
- );
+    </div>
+  );
 };
 
-export default PostsList;
+export default PostComments;
