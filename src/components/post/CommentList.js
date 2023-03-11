@@ -12,6 +12,7 @@ const CommentList = () => {
   console.log(id);
   const dispatch = useDispatch();
   const comments = useSelector((state) => state.posts.postComments);
+    console.log(comments);
 
   const convertRelativeTime = (date) => {
     return moment(date).locale('tr').format('lll');
@@ -19,10 +20,7 @@ const CommentList = () => {
 
   useEffect(() => {
     dispatch(fetchPostComments(id))
-      .then((data) => {
-        console.log(data);
-        setLoading(false);
-      })
+      .then((data) => setLoading(false))
       .catch((error) => {
         console.log(error);
         setLoading(false);
