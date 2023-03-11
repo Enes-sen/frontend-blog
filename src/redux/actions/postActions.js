@@ -64,6 +64,7 @@ export const removePost = (id) => async (dispatch) => {
 export const fetchPostComments = (postId) => async (dispatch) => {
   try {
     const { data } = await api.getPostComments(postId);
+    console.log(data);
     dispatch({
       type: GET_POST_COMMENTS_SUCCESS,
       payload: { postId, comments: data },
