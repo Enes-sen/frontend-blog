@@ -1,75 +1,68 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPostComments, removeComment } from "../../redux/actions/postActions";
-import { Card, CardBody, CardSubtitle, CardTitle, Badge, CardText, Button } from "reactstrap";
+import { fetchPostComments } from "../../redux/actions/commentActions";
+import { Card, CardBody, CardTitle, CardText, Badge } from "reactstrap";
 import moment from "moment";
 import "moment/locale/tr";
 
-const CommentList = ({ postId }) => {
+const PostComments = ({ postId }) => {
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  const comments = useSelector(state => state.posts.postComments);
-
-  useEffect(() => {
-    dispatch(fetchPostComments(postId));
-  }, [dispatch, postId]);
+  const comments = useSelector((state) => state.posts.postComments);
 
   const convertRelativeTime = (date) => {
     return moment(date).locale('tr').format('lll');
   };
 
-  const handleDeleteComment = (commentId) => {
-    dispatch(removeComment(postId, commentId));
-  };
+  useEffect(() => {
+    dispatch(fetchPostComments(postId))
+      .then(() => setLoading(false))
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  }, [dispatch, postId]);
 
-  if (!comments) {
-    return <div>Loading comments...</div>;
+  if (loading) {
+    return <div>Yükleniyor...</div>;
+  }
+
+  if (!Array.isArray(comments)) {
+    return <div>Bu gönderiye ait yorum yok</div>;
   }
 
   return (
-    <div className="comments">
-      {comments.length > 0 ? (
-        comments
-          .sort((a, b) => new Date(b.date) - new Date(a.date))
-          .map((comment, index) => {
-            // Check if the comment is pending
-            const isPending = comment.status === 'pending';
-
-            return (
-              <React.Fragment key={index}>
-                <Card className={`mt-3 ${isPending ? 'bg-secondary text-white' : ''}`}>
-                  <CardBody>
-                    <CardTitle tag="h6">{comment?.name}</CardTitle>
-                    <CardSubtitle tag="h6" className="mb-2 text-muted">
-                      <Badge className="ml-2" color="secondary">{convertRelativeTime(comment?.date)}</Badge>
-                    </CardSubtitle>
-                    <CardText>{comment?.comment}</CardText>
-                    {isPending ? (
-                      <div className="text-center">
-                        <em>This comment is awaiting moderation.</em>
-                      </div>
-                    ) : (
-                      <Button color="danger" onClick={() => handleDeleteComment(comment._id)}>
-                        Delete Comment
-                      </Button>
-                    )}
-                  </CardBody>
-                </Card>
-                {index < comments.length - 1 && <div style={{ height: "50px" }}></div>}
-                {/* add space between posts */}
-              </React.Fragment>
-            )
-          })
-      ) : (
-        <div>No comments to show.</div>
-      )}
-      {console.log(comments)} {/* Yorumları Console'da görmek için bu satırı ekledik */}
+    <div
+      className="Container-fluid mt-5"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        position: "relative",
+        marginTop: "45%",
+        marginBottom: "160px",
+        height: "600px",
+        width: "80%",
+        margin: "0 auto",
+      }}
+    >
+      {comments.map((comment, index) => (
+        <React.Fragment key={index}>
+          <Card
+            className="mt-5"
+            style={{ width: "100%", margin: "0 auto", padding: "10px" }}
+          >
+            <CardBody>
+              <CardTitle tag="h5">{comment.name}</CardTitle>
+              <Badge color="primary">{convertRelativeTime(comment.date)}</Badge>
+              <CardText>{comment.comment}</CardText>
+            </CardBody>
+          </Card>
+          {index < comments.length - 1 && <div style={{ height: "50px" }}></div>}
+        </React.Fragment>
+      ))}
     </div>
   );
 };
 
-CommentList.propTypes = {
-  postId: PropTypes.string.isRequired,
-};
-
-export default CommentList;
+export default PostComments;
