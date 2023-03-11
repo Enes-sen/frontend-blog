@@ -32,9 +32,8 @@ const CommentList = () => {
   }
 
   if (!Array.isArray(comments)) {
-    return <div>Bu gönderiye ait yorum yok</div>;
-  }
-
+  return <div>Bu gönderiye ait yorum yok</div>;
+} else {
   return (
     <div
       className="Container-fluid mt-5"
@@ -67,6 +66,7 @@ const CommentList = () => {
       ))}
     </div>
   );
+}
 };
 
 export default CommentList;
