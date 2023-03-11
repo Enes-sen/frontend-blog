@@ -18,7 +18,7 @@ import {
 const initialState = {
   posts: [],
   singlePost: {},
-  postComments: [],
+  postComments: {},
 };
 
 const postReducer = (state = initialState, action) => {
@@ -66,43 +66,43 @@ const postReducer = (state = initialState, action) => {
     case GET_POST_COMMENTS_FAILURE:
       console.error(action.payload);
       return state;
- case CREATE_COMMENT_SUCCESS:
-  const postId = action.payload.postId;
-  const comment = action.payload.comment;
-  const postIndex = state.posts.findIndex(post => post.id === postId);
-  if (postIndex === -1) {
-    // If the post doesn't exist in the current state, don't update it
-    return state;
-  }
-  const updatedPost = {
-    ...state.posts[postIndex],
-    comments: [comment, ...(state.posts[postIndex].comments || [])]
-  };
-  return {
-    ...state,
-    posts: [
-      ...state.posts.slice(0, postIndex),
-      updatedPost,
-      ...state.posts.slice(postIndex + 1)
-    ],
-    postComments: {
-      ...state.postComments,
-      [postId]: [
-        comment,
-        ...(state.postComments[postId] || [])
-      ],
-    },
-  };
+    case CREATE_COMMENT_SUCCESS:
+      const { postId, comment } = action.payload;
+      const postIndex = state.posts.findIndex((post) => post.id === postId);
+      if (postIndex === -1) {
+        // If the post doesn't exist in the current state, don't update it
+        return state;
+      }
+      const updatedPost = {
+        ...state.posts[postIndex],
+        comments: [comment, ...(state.posts[postIndex].comments || [])],
+      };
+      return {
+        ...state,
+        posts: [
+          ...state.posts.slice(0, postIndex),
+          updatedPost,
+          ...state.posts.slice(postIndex + 1),
+        ],
+        postComments: {
+          ...state.postComments,
+          [postId]: [
+            comment,
+            ...(state.postComments[postId] || []),
+          ],
+        },
+      };
     case CREATE_COMMENT_FAILURE:
       console.error(action.payload);
       return state;
     case DELETE_COMMENT_SUCCESS:
+      const { postId: commentPostId, commentId } = action.payload;
       return {
         ...state,
         postComments: {
           ...state.postComments,
-          [action.payload.postId]: state.postComments[action.payload.postId].filter(
-            (comment) => comment.id !== action.payload.commentId
+          [commentPostId]: state.postComments[commentPostId].filter(
+            (comment) => comment.id !== commentId
           ),
         },
       };
