@@ -1,34 +1,39 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchPostComments } from "../../redux/actions/postActions";
 import { Card, CardBody, CardTitle, CardText, Badge } from "reactstrap";
 import moment from "moment";
 import "moment/locale/tr";
 
 const CommentList = ({ postId }) => {
-  const [loading, setLoading] = useState(true);
-  const dispatch = useDispatch();
-  const comments = useSelector((state) => state.posts.postComments);
+  const [isLoading, setIsLoading] = useState(true);
+  const [comments, setComments] = useState([]);
 
-  const convertRelativeTime = (date) => {
-    return moment(date).locale('tr').format('lll');
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchPostComments(postId))
-      .then(() => setLoading(false))
+      .then((response) => {
+        setComments(response);
+        setIsLoading(false);
+        console.log(response);
+      })
       .catch((error) => {
         console.log(error);
-        setLoading(false);
+        setIsLoading(false);
       });
   }, [dispatch, postId]);
 
-  if (loading) {
+  const convertRelativeTime = (date) => {
+    return moment(date).locale("tr").format("lll");
+  };
+
+  if (isLoading) {
     return <div>Yükleniyor...</div>;
   }
 
-  if (!Array.isArray(comments)) {
+  if (comments.length === 0) {
     return <div>Bu gönderiye ait yorum yok</div>;
   }
 
@@ -55,11 +60,15 @@ const CommentList = ({ postId }) => {
           >
             <CardBody>
               <CardTitle tag="h5">{comment.name}</CardTitle>
-              <Badge color="primary">{convertRelativeTime(comment.date)}</Badge>
+              <Badge color="primary">
+                {convertRelativeTime(comment.date)}
+              </Badge>
               <CardText>{comment.comment}</CardText>
             </CardBody>
           </Card>
-          {index < comments.length - 1 && <div style={{ height: "50px" }}></div>}
+          {index < comments.length - 1 && (
+            <div style={{ height: "50px" }}></div>
+          )}
         </React.Fragment>
       ))}
     </div>
