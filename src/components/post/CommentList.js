@@ -11,8 +11,6 @@ const CommentList = () => {
   const { id } = useParams();
   console.log(id);
   const dispatch = useDispatch();
-  const comments = useSelector((state) => state.posts.postComments);
-    console.log(comments);
 
   const convertRelativeTime = (date) => {
     return moment(date).locale('tr').format('lll');
@@ -26,14 +24,12 @@ const CommentList = () => {
         setLoading(false);
       });
   }, [dispatch, id]);
-
+  const comments = useSelector((state) => state.posts.postComments);
   if (loading) {
     return <div>Yükleniyor...</div>;
   }
 
-  if (!Array.isArray(comments)) {
-  return <div>Bu gönderiye ait yorum yok</div>;
-} else {
+  if (Array.isArray(comments)) {
   return (
     <div
       className="Container-fluid mt-5"
@@ -66,6 +62,8 @@ const CommentList = () => {
       ))}
     </div>
   );
+} else {
+ return <div>gösterilecek yorum bulunamadı</div>;
 }
 };
 
