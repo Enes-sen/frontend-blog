@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPostComments } from "../../redux/actions/postActions";
 import { Card, CardBody, CardTitle, CardText, Badge } from "reactstrap";
@@ -63,6 +64,10 @@ const CommentList = ({ postId }) => {
       ))}
     </div>
   );
+};
+
+CommentList.propTypes = {
+  postId: PropTypes.string.isRequired,
 };
 
 export default CommentList;
