@@ -1,39 +1,37 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchPostComments } from "../../redux/actions/postActions";
 import { Card, CardBody, CardTitle, CardText, Badge } from "reactstrap";
 import moment from "moment";
 import "moment/locale/tr";
+import PropTypes from "prop-types";
 
 const CommentList = ({ postId }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
   const [comments, setComments] = useState([]);
 
-  const dispatch = useDispatch();
+  const convertRelativeTime = (date) => {
+    return moment(date).locale('tr').format('lll');
+  };
 
   useEffect(() => {
     dispatch(fetchPostComments(postId))
-      .then((response) => {
-        setComments(response);
-        setIsLoading(false);
-        console.log(response);
+      .then((data) => {
+        setComments(data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
-        setIsLoading(false);
+        setLoading(false);
       });
   }, [dispatch, postId]);
 
-  const convertRelativeTime = (date) => {
-    return moment(date).locale("tr").format("lll");
-  };
-
-  if (isLoading) {
+  if (loading) {
     return <div>Yükleniyor...</div>;
   }
 
-  if (comments.length === 0) {
+  if (!Array.isArray(comments) || comments.length === 0) {
     return <div>Bu gönderiye ait yorum yok</div>;
   }
 
@@ -60,15 +58,11 @@ const CommentList = ({ postId }) => {
           >
             <CardBody>
               <CardTitle tag="h5">{comment.name}</CardTitle>
-              <Badge color="primary">
-                {convertRelativeTime(comment.date)}
-              </Badge>
+              <Badge color="primary">{convertRelativeTime(comment.date)}</Badge>
               <CardText>{comment.comment}</CardText>
             </CardBody>
           </Card>
-          {index < comments.length - 1 && (
-            <div style={{ height: "50px" }}></div>
-          )}
+          {index < comments.length - 1 && <div style={{ height: "50px" }}></div>}
         </React.Fragment>
       ))}
     </div>
@@ -76,7 +70,7 @@ const CommentList = ({ postId }) => {
 };
 
 CommentList.propTypes = {
-  postId: PropTypes.string.isRequired,
+  postId: PropTypes.number.isRequired,
 };
 
 export default CommentList;
