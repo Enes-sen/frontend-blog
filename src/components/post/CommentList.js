@@ -4,34 +4,34 @@ import { fetchPostComments } from "../../redux/actions/postActions";
 import { Card, CardBody, CardTitle, CardText, Badge } from "reactstrap";
 import moment from "moment";
 import "moment/locale/tr";
-import PropTypes from "prop-types";
 
-const CommentList = ({ postId }) => {
+const CommentList = () => {
   const [loading, setLoading] = useState(true);
+  const { id } = useParams();
   const dispatch = useDispatch();
-  const [comments, setComments] = useState([]);
+  const comments = useSelector((state) => state.posts.postComments);
 
   const convertRelativeTime = (date) => {
     return moment(date).locale('tr').format('lll');
   };
 
   useEffect(() => {
-    dispatch(fetchPostComments(postId))
+    dispatch(fetchPostComments(id))
       .then((data) => {
-        setComments(data);
+        console.log(data);
         setLoading(false);
       })
       .catch((error) => {
         console.log(error);
         setLoading(false);
       });
-  }, [dispatch, postId]);
+  }, [dispatch, id]);
 
   if (loading) {
     return <div>Yükleniyor...</div>;
   }
 
-  if (!Array.isArray(comments) || comments.length === 0) {
+  if (!Array.isArray(comments)) {
     return <div>Bu gönderiye ait yorum yok</div>;
   }
 
@@ -67,10 +67,6 @@ const CommentList = ({ postId }) => {
       ))}
     </div>
   );
-};
-
-CommentList.propTypes = {
-  postId: PropTypes.number.isRequired,
 };
 
 export default CommentList;
