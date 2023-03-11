@@ -86,3 +86,5 @@ const PostsList = () => {
   </div>
  );
 };
+
+export default PostsList;
