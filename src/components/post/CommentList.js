@@ -9,6 +9,7 @@ import "moment/locale/tr";
 const CommentList = () => {
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
+  console.log(id);
   const dispatch = useDispatch();
   const comments = useSelector((state) => state.posts.postComments);
 
