@@ -17,7 +17,7 @@ import {
 
 const initialState = {
   posts: [],
-  singlePost: null,
+  singlePost: {},
   postComments: [],
 };
 
