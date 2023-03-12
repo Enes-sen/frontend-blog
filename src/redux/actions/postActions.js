@@ -67,7 +67,7 @@ export const fetchPostComments = (postId) => async (dispatch) => {
     console.log(data);
     dispatch({
       type: GET_POST_COMMENTS_SUCCESS,
-      payload: { postId, comments: data },
+      payload:data,
     });
   } catch (error) {
     console.error(error);
