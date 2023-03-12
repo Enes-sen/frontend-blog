@@ -17,7 +17,7 @@ import {
 
 const initialState = {
   posts: [],
-  singlePost: {},
+  post: {},
   comments: [],
   loading: true,
   error: null,
