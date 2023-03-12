@@ -24,7 +24,7 @@ const CommentList = () => {
         setLoading(false);
       });
   }, [dispatch, id]);
-  const comments = useSelector((state) => state.posts.postComments);
+  const comments = useSelector((state) => state.posts.comments);
   if (loading) {
     return <div>Yükleniyor...</div>;
   }
