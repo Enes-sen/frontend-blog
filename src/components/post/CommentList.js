@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import { fetchPostComments } from "../../redux/actions/postActions";
 import { Card, CardBody, CardTitle, CardText, Badge } from "reactstrap";
 import moment from "moment";
 import "moment/locale/tr";
 
-const CommentList = () => {
+const CommentList = ({ postId }) => {
   const [loading, setLoading] = useState(true);
-  const { id } = useParams();
   const comments = useSelector((state) => state.posts.comments);
+  console.log("postId:", postId, ",comments:", comments);
   const dispatch = useDispatch();
 
   const convertRelativeTime = (date) => {
@@ -17,19 +16,19 @@ const CommentList = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchPostComments(id))
-      .then(() => setLoading(false))
+    dispatch(fetchPostComments(postId))
+      .then((data) => setLoading(false))
       .catch((error) => {
         console.log(error);
         setLoading(false);
       });
-  }, [dispatch, id]);
+  }, [dispatch, postId]);
 
   if (loading) {
     return <div>Yükleniyor...</div>;
   }
 
-  if (Array.isArray(comments) && comments.length > 0) {
+  if (Array.isArray(comments) && comments.length !== 0) {
     return (
       <div
         className="Container-fluid mt-5"
@@ -59,15 +58,13 @@ const CommentList = () => {
                 <CardText>{comment.comment}</CardText>
               </CardBody>
             </Card>
-            {index < comments.length - 1 && (
-              <div style={{ height: "50px" }}></div>
-            )}
+            {index < comments.length - 1 && <div style={{ height: "50px" }}></div>}
           </React.Fragment>
         ))}
       </div>
     );
   } else {
-    return <div>Gösterilecek yorum bulunamadı.</div>;
+    return <div>Gösterilecek yorum bulunamadı</div>;
   }
 };
 
