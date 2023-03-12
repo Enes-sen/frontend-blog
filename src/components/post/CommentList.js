@@ -28,8 +28,7 @@ const CommentList = ({ postId }) => {
     return <div>Yükleniyor...</div>;
   }
 
-  if (Array.isArray(comments) && comments.length !== 0) {
-    return (
+return (
       <div
         className="Container-fluid mt-5"
         style={{
@@ -63,9 +62,6 @@ const CommentList = ({ postId }) => {
         ))}
       </div>
     );
-  } else {
-    return <div>Gösterilecek yorum bulunamadı</div>;
-  }
 };
 
 export default CommentList;
