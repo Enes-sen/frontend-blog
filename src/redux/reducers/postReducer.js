@@ -13,105 +13,84 @@ import {
   CREATE_COMMENT_FAILURE,
   DELETE_COMMENT_SUCCESS,
   DELETE_COMMENT_FAILURE,
-} from "../actions/actionTypes";
+} from "../actions/types";
 
 const initialState = {
   posts: [],
-  singlePost: {},
-  postComments: {},
+  post: {},
+  comments: [],
+  loading: true,
+  error: null,
 };
 
-const postReducer = (state = initialState, action) => {
+const blogReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_POSTS_SUCCESS:
       return {
         ...state,
         posts: action.payload,
+        loading: false,
+        error: null,
       };
     case GET_POSTS_FAILURE:
-      console.error(action.payload);
-      return state;
+    case GET_SINGLE_POST_FAILURE:
+    case CREATE_POST_FAILURE:
+    case DELETE_POST_FAILURE:
+    case GET_POST_COMMENTS_FAILURE:
+    case CREATE_COMMENT_FAILURE:
+    case DELETE_COMMENT_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
     case GET_SINGLE_POST_SUCCESS:
       return {
         ...state,
-        singlePost: action.payload,
+        post: action.payload,
+        loading: false,
+        error: null,
       };
-    case GET_SINGLE_POST_FAILURE:
-      console.error(action.payload);
-      return state;
     case CREATE_POST_SUCCESS:
       return {
         ...state,
-        posts: [action.payload, ...state.posts],
+        posts: [...state.posts, action.payload],
+        loading: false,
+        error: null,
       };
-    case CREATE_POST_FAILURE:
-      console.error(action.payload);
-      return state;
     case DELETE_POST_SUCCESS:
       return {
         ...state,
-        posts: state.posts.filter((post) => post.id !== action.payload),
+        posts: state.posts.filter((post) => post._id !== action.payload),
+        loading: false,
+        error: null,
       };
-    case DELETE_POST_FAILURE:
-      console.error(action.payload);
-      return state;
     case GET_POST_COMMENTS_SUCCESS:
       return {
         ...state,
-        postComments: {
-          ...state.postComments,
-          [action.payload.postId]: action.payload.comments,
-        },
+        comments: action.payload,
+        loading: false,
+        error: null,
       };
-    case GET_POST_COMMENTS_FAILURE:
-      console.error(action.payload);
-      return state;
     case CREATE_COMMENT_SUCCESS:
-      const { postId, comment } = action.payload;
-      const postIndex = state.posts.findIndex((post) => post.id === postId);
-      if (postIndex === -1) {
-        // If the post doesn't exist in the current state, don't update it
-        return state;
-      }
-      const updatedPost = {
-        ...state.posts[postIndex],
-        comments: [comment, ...(state.posts[postIndex].comments || [])],
-      };
       return {
         ...state,
-        posts: [
-          ...state.posts.slice(0, postIndex),
-          updatedPost,
-          ...state.posts.slice(postIndex + 1),
-        ],
-        postComments: {
-          ...state.postComments,
-          [postId]: [
-            comment,
-            ...(state.postComments[postId] || []),
-          ],
-        },
+        comments: [...state.comments, action.payload],
+        loading: false,
+        error: null,
       };
-    case CREATE_COMMENT_FAILURE:
-      console.error(action.payload);
-      return state;
     case DELETE_COMMENT_SUCCESS:
-      const { postId: commentPostId, commentId } = action.payload;
       return {
         ...state,
-        postComments: {
-          ...state.postComments,
-          [commentPostId]: state.postComments[commentPostId].filter(
-            (comment) => comment.id !== commentId
-          ),
-        },
+        comments: state.comments.filter(
+          (comment) => comment._id !== action.payload
+        ),
+        loading: false,
+        error: null,
       };
-    case DELETE_COMMENT_FAILURE:
-      console.error(action.payload);
-      return state;
     default:
       return state;
   }
 };
 
-export default postReducer;
+export default blogReducer;
