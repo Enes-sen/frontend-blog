@@ -13,7 +13,7 @@ import {
   CREATE_COMMENT_FAILURE,
   DELETE_COMMENT_SUCCESS,
   DELETE_COMMENT_FAILURE,
-} from "../actions/types";
+} from "../actions/actionTypes";
 
 const initialState = {
   posts: [],
