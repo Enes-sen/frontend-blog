@@ -9,7 +9,8 @@ import "moment/locale/tr";
 const CommentList = () => {
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  console.log(id);
+  const comments = useSelector((state) => state.posts.comments);
+  console.log("postId:",id,",comments:",comments);
   const dispatch = useDispatch();
 
   const convertRelativeTime = (date) => {
@@ -24,7 +25,6 @@ const CommentList = () => {
         setLoading(false);
       });
   }, [dispatch, id]);
-  const comments = useSelector((state) => state.posts.comments);
   if (loading) {
     return <div>Yükleniyor...</div>;
   }
