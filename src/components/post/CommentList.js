@@ -10,7 +10,6 @@ const CommentList = () => {
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const comments = useSelector((state) => state.posts.comments);
-  console.log("postId:",id,",comments:",comments);
   const dispatch = useDispatch();
 
   const convertRelativeTime = (date) => {
@@ -19,52 +18,57 @@ const CommentList = () => {
 
   useEffect(() => {
     dispatch(fetchPostComments(id))
-      .then((data) => setLoading(false))
+      .then(() => setLoading(false))
       .catch((error) => {
         console.log(error);
         setLoading(false);
       });
   }, [dispatch, id]);
+
   if (loading) {
     return <div>Yükleniyor...</div>;
   }
 
-  if (Array.isArray(comments)) {
-  return (
-    <div
-      className="Container-fluid mt-5"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        position: "relative",
-        marginTop: "45%",
-        marginBottom: "160px",
-        height: "600px",
-        width: "80%",
-        margin: "0 auto",
-      }}
-    >
-      {comments.map((comment, index) => (
-        <React.Fragment key={index}>
-          <Card
-            className="mt-5"
-            style={{ width: "100%", margin: "0 auto", padding: "10px" }}
-          >
-            <CardBody>
-              <CardTitle tag="h5">{comment.name}</CardTitle>
-              <Badge color="primary">{convertRelativeTime(comment.date)}</Badge>
-              <CardText>{comment.comment}</CardText>
-            </CardBody>
-          </Card>
-          {index < comments.length - 1 && <div style={{ height: "50px" }}></div>}
-        </React.Fragment>
-      ))}
-    </div>
-  );
-} else {
- return <div>gösterilecek yorum bulunamadı</div>;
-}
+  if (Array.isArray(comments) && comments.length > 0) {
+    return (
+      <div
+        className="Container-fluid mt-5"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          position: "relative",
+          marginTop: "45%",
+          marginBottom: "160px",
+          height: "600px",
+          width: "80%",
+          margin: "0 auto",
+        }}
+      >
+        {comments.map((comment, index) => (
+          <React.Fragment key={index}>
+            <Card
+              className="mt-5"
+              style={{ width: "100%", margin: "0 auto", padding: "10px" }}
+            >
+              <CardBody>
+                <CardTitle tag="h5">{comment.name}</CardTitle>
+                <Badge color="primary">
+                  {convertRelativeTime(comment.date)}
+                </Badge>
+                <CardText>{comment.comment}</CardText>
+              </CardBody>
+            </Card>
+            {index < comments.length - 1 && (
+              <div style={{ height: "50px" }}></div>
+            )}
+          </React.Fragment>
+        ))}
+      </div>
+    );
+  } else {
+    return <div>Gösterilecek yorum bulunamadı.</div>;
+  }
 };
 
 export default CommentList;
