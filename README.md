@@ -51,3 +51,29 @@ enes-sen-frontend-blog/
             ├── config.js        # Redux Store yapılandırması
             ├── index.js         # Root Reducer (Kök düşürücü)
             └── postReducer.js   # Gönderi ve yorum durum yönetimi
+
+
+[ Visitor ]
+    │
+    ▼ (opens)
+[ App Entry (index.js) ]
+    │
+    ▼ (renders)
+[ App Reducers (App.js) ] ──► [ Navigation (navi.js) ]
+    │
+    ├─► (routes to) ──► [ Posts List (postsList.js) ] ───┐
+    ├─► (routes to) ──► [ Post Detail (SinglePost.js) ] ─┼─► (dispatches fetch/create/delete)
+    └─► (routes to) ──► [ Post Form (AddpostForm.js) ] ──┘
+                               │
+                               ▼
+                    [ State and Requests ]
+                    ├── [ Redux Store (config.js) ]
+                    ├── [ Post Actions (postActions.js) ]
+                    └── [ Post State (postReducer.js) ]
+                               │
+                               ▼ (calls)
+                         [ API Client (api.js) ]
+                               │
+                               ▼ (sends requests)
+                         [ Remote Service: Blog API ]
+                         ([https://fistblog.onrender.com](https://fistblog.onrender.com))/not active rightnow
